@@ -52,9 +52,9 @@ Centralni i kritičan aspekt problema sigurnosti softvera je problem u samom sof
 Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.
 Kontrola pristupa se ostvaruje u tri koraka.
 \begin{itemize}
-                    \item Identifikacija
-                    \item Autentikacija
-                    \item Autorizacija
+	\item Identifikacija
+	\item Autentikacija
+	\item Autorizacija
 \end{itemize} 
 
 \subsubsection{Identifikacija}
@@ -83,14 +83,12 @@ Istovremeno, ako je napadač u mogućnosti da falsifikuje ove kredencijale ili t
 mehanizam autentikacije. Jedan od načina zaštite protiv falsifikovanja kredencijala je korišćenje 
 kriptografskih algoritama pri pravljenju kredencijala ili tokena.
 
-
 Sistem za autentikaciju treba da bude dizajniran tako da automatski zahteva ponovnu autentikaciju nakon nekog 
 perioda neaktivnosti ili pre neke kritične operacije.
 Ako sistem za autentikaciju ne ograniči vremenski period za koji će korisnik biti autentikovan onda može 
 da dopusti pristup korisnicima kojima ne bi trebalo. Zamislimo korisnika koji se prijavljuje na javni terminal
 i onda odlazi, pritom zaboravljajući da se odjavi. Ispravno dizajniran sistem za autentikaciju 
 će automatski odjaviti korisnika, nakon nekog perioda neaktivnosti.
-
 
 \subsubsection{Autorizacija}
 Autorizacija predstavlja mehanizam provere prava specifičnog subjekta.
@@ -114,9 +112,9 @@ pretpostavke o podacima potvrđene.
 
 Kako bi se obezbedila kvalitetna validacija podataka, neophodno je koristiti kombinacije sledećih pristupa:
 \begin{itemize}
- \item \textit{Centralizovani mehanizam za validaciju} - svi podaci koji ulaze u sistem moraju da prođu kroz osnovne korake validacije pre nego što sistem počne da ih upotrebljava
- \item \textit{Validacija često ponovljenih podataka} - poželjno je koristiti već postojeće biblioteke za provere ispravnosti čestih formata podataka kao što su adrese elektronske pošte
- \item \textit{Upotreba provere tipova na implementacionom nivou jezika} - često možemo iskoristiti svojstva već postojećih tipova u korišćenom programskom jeziku za provere podataka koje koristimo, kao što je format datuma
+	\item \textit{Centralizovani mehanizam za validaciju} - svi podaci koji ulaze u sistem moraju da prođu kroz osnovne korake validacije pre nego što sistem počne da ih upotrebljava
+	\item \textit{Validacija često ponovljenih podataka} - poželjno je koristiti već postojeće biblioteke za provere ispravnosti čestih formata podataka kao što su adrese elektronske pošte
+	\item \textit{Upotreba provere tipova na implementacionom nivou jezika} - često možemo iskoristiti svojstva već postojećih tipova u korišćenom programskom jeziku za provere podataka koje koristimo, kao što je format datuma
 \end{itemize}
 Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosnih rizika, od kojih je jedan ilustrovan u primeru \ref{primer5}
 
@@ -125,21 +123,20 @@ Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosni
 	Ukoliko se za implementaciju koristi jezik koji nema automatsku kontrolu memorijskog pristupa, poput C programskog jezika, i ne proveri se ispravnost ulaza, može doći do različitih problema, kao što su prekoračenje bafera, pristupanje memoriji van opsega, neispravne niske... Svaki od ovih problema za uzrok ima nasilno prekidanje rada programa.
 \end{primer}
 
-\section{Bezbednost veb servera}
+\section{Bezbednost veb aplikacija}
 
+Sa pojavom Veb 2.0, povećanjem deljenja informacija preko socijalnih mreža i korišćenjem veba kao sredstva poslovanja i pružanja različitih informacija bezbednost sajtova često biva ugrožena upadima od strane zlonamernih programera.
 
-Sa pojavom Veb 2.0, pove\'{c}anjem deljenja informacija preko socijalnih mre\v{z}a i kori\v{s}\'{c}enjem veba kao sredstva poslovanja i pru\v{z}anja razli\v{c}itih informacija bezbednost sajtova \v{c}esto biva ugro\v{z}ena direktnim upadima od strane zlonamernih programera.
+Zlonamerni programeri (u daljem tekstu hakeri) ili nastoje da kompromituju korporativnu mrežu ili navode krajnje korisnike koji joj pristupaju ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi-virusi). Kao rezultat toga, industrija obraća veliku pažnju na bezbednost samih veb aplikacija, pored bezbednosti osnovne računarske mreže i operativnih sistema.
 
-Zlonamerni programeri (u daljem tekstu hakeri) ili nastoje da kompromituju korporativnu mre\v{z}u ili navode krajnje korisnike koji pristupaju mre\v{z}i ka preuzimanju sadr\v{z}aja \v{c}ijeg rizika nisu svesni (zlonamerni programi-virusi). Kao rezultat toga, industrija obra\'{c}a veliku pa\v{z}nju na bezbednost samih veb aplikacija, pored bezbednosti osnovne ra\v{c}unarske mre\v{z}e i operativnih sistema.
-
-\textbf{Bezbednost veb sajtova} je grana bezbednosti informacija koja se bavi bezbedno\v{s}\'{c}u veb sajtova, veb aplikacija i veb servera. Bezbednost veb aplikacija se oslanja na principe bezbednosti aplikacija uop\v{s}te, ali ih primenjuje specifi\v{c}no za internet i veb sisteme.
-Bezbednost veb servera je za\v{s}tita informacija dostupnih preko veb servera. Te informacije se mogu ugroziti pove\'{c}anim sigurnosnim rizicima i propustima prilikom implementacije.
-
+Bezbednost veba je grana bezbednosti informacija koja se bavi bezbednošću veb sajtova, veb aplikacija i veb servera. \textbf{Bezbednost veb aplikacija} se oslanja na principe bezbednosti aplikacija uopšte, ali ih primenjuje specifično za internet i veb sisteme.
+Bezbednost veb servera je zaštita informacija dostupnih preko veb servera. Te informacije se mogu ugroziti povećanim sigurnosnim rizicima i propustima prilikom implementacije.
 
 \subsection{Sigurosni rizici}
-Najve\'{c}i sigurnosni rizici poti\v{c}u iz nerazumevanja sposobnosti hakera. Kada se razmi\v{s}lja o za\v{s}titi aplikacije, ne sme se voditi mi\v{s}lju: sve \v{s}to je prikazano, biva na\v{s}e ograni\v{c}enje onoga \v{s}to mo\v{z}emo da u\v{c}inimo. Sve \v{s}to predstavlja klijentsku stranu i ograni\v{c}enja koja su na njoj nametnuta se veoma lako mogu zaobi\'{c}i.
-\textbf{Pretra\v{z}iva\v{c} ne predstavlja ograni\v{c}enje }.\\
-?U okrviru ovog rada, razmatra\'{c}emo tri velika sigurnosna rizika:
+
+Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se razmišlja o zaštiti veb aplikacije, ne sme se voditi mišlju: sve što je prikazano, biva naše ograničenje onoga što možemo da učinimo. Sve što predstavlja klijentsku stranu, i ograničenja koja su pomoću nje nametnuta, se veoma lako mogu zaobići.
+\textbf{Pretraživač ne predstavlja ograničenje }.\\
+U okrviru ovog rada, razmatrićemo tri najčešće vrste napada i ukazati na sigurnosne rizike na koje se oslanjaju:
 \begin{enumerate}
 	\item Cross-Site Scripting (XSS)
 	\item SQL Injection
@@ -147,45 +144,53 @@ Najve\'{c}i sigurnosni rizici poti\v{c}u iz nerazumevanja sposobnosti hakera. Ka
 \end{enumerate}
 \newpage
 \subsection{Cross-Site Scripting (XSS)}
-\textbf{Cross Site Scripting}, poznatiji kao \textbf{XSS}, je napad injekcijom kodova u sajt. Takođe je jedan od najuobi\v{c}ajnih na\v{c}ina napada, jer svaki sajt zahteva od korisni\v{c}kog pretra\v{z}iva\v{c}a podr\v{s}ku javascript-a.\\
-\textbf{Problem:} Korisnik je u situaciji da po\v{s}alje neki vid odgovora stranici (searchbox), a ako taj odgovor sadr\v{z}i neke HTML tagove ili javascript kod, stranica ih renderuje i izvr\v{s}ava kod.\\
-\textbf{Posledice:} \begin{enumerate}
+\textbf{Cross Site Scripting}, poznatiji kao \textbf{XSS}, je napad injekcijom kodova u sajt. Takođe je jedan od najuobičajnih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku javascript-a.\\
+\textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (searchbox), a ako taj odgovor sadrži neke HTML tagove ili javascript kod, stranica ih renderuje i izvršava kod.\\
+\textbf{Posledice:}
+\begin{enumerate}
 	\item krađa ID-a sesije i sasim tim krađa korisnikovog indentitea (u cilju obavljanja poslova u ime tog korisnika)
-	\item kontrola stranice (blokiranje rada, menjanje pojedina\v{c}nih elemenata...)
+	\item kontrola stranice (blokiranje rada, menjanje pojedinačnih elemenata...)
 	\item redirekcija na drugu, zlonamernu stranicu
 \end{enumerate}
-U nastavku vide\'{c}emo razli\v{c}ite vrste napada tipa XSS.
+U nastavku videćemo različite vrste napada tipa XSS.
+
 \subsubsection{Reflected XSS}
-Reflected XSS napad se zasniva na injektovanju izvr\v{s}nog koda u HTTP odgovor. Sam kod nije sa\v{c}uvan u okviru aplikacije, ve\'{c} (u naivnim primerima) mo\v{z}e biti vidljiv u okviru nadograđenog url-a (kao posledica http odgovora).
-\begin{primer}\label{primer1}
-Pretpostavimo da imamo jednostavan sajt, \v{c}ija je uloga da ima jedan searchbox i dugme 'pretraga' (sadr\v{z}aj onoga \v{s}to pretra\v{z}ujemo nije bitan za ovaj napad)
+
+Reflected XSS napad se zasniva na injektovanju izvršnog koda u HTTP odgovor. Sam kod nije sačuvan u okviru aplikacije, već (u naivnim primerima) može biti vidljiv u okviru nadograđenog url-a (kao posledica http odgovora).
+\begin{primer}
+\label{primer1}
+Pretpostavimo da imamo jednostavan sajt, čija je uloga da ima jedan searchbox i dugme 'pretraga' (sadržaj onoga što pretražujemo nije bitan za ovaj napad)
 \begin{enumerate}
-\item nakon bilo kakve pretrage, promeni\'{c}e nam se url: 
+\item nakon bilo kakve pretrage, promeniće nam se url: 
 \begin{lstlisting}
 www.sajt.com?key="pretrazujemo"
 \end{lstlisting}
-\item izmenom sadr\v{z}aja sekcije 'key', mo\v{z}emo da ubacimo neki skript
+\item izmenom sadržaja sekcije 'key', možemo da ubacimo neki skript
 
 \begin{lstlisting}
 <script>alert("123")</script>
 \end{lstlisting}
 
-(isti efekat mo\v{z}emo posti\'{c}i i sa uno\v{s}enjem takvog koda unutar searchbox-a i izvr\v{s}iti pretragu)
-\item Uno\v{s}enjem takvog url-a u na\v{s} pretra\v{z}iva\v{c} (ili kliknom na dugme 'pretraga') ispisiva\'{c}e se poruka "123"\\
+(isti efekat možemo postići i sa unošenjem takvog koda unutar searchbox-a i izvršiti pretragu)
+\item Unošenjem takvog url-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka "123"\\
 
 \end{enumerate}
 \end{primer}
 
- Naravno, primer \ref{primer1} je jednostavan primer bez vidljivih znakova opasnosti, ali na sli\v{c}nom principu deluju zlonamerni mail-ovi koji nam pristi\v{z}u ili sajtovi (ili \v{c}ak korisnici) koji name\'{c}u linkove da korisnik klikne na njih.\\
-Na\v{c}in prikrivanja ovakvih napada (jer korisnik mo\v{z}e da nasluti iz url-a da je re\v{c} o linku ka zlonamernoj strani) jesu URL shortener aplikacije.
+ Naravno, primer \ref{primer1} je jednostavan primer bez vidljivih znakova opasnosti, ali na sličnom principu deluju zlonamerni mail-ovi koji nam pristižu ili sajtovi (ili čak korisnici) koji nameću linkove da korisnik klikne na njih.\\
+Način prikrivanja ovakvih napada (jer korisnik može da nasluti iz url-a da je reč o linku ka zlonamernoj strani) jesu URL shortener aplikacije.
+
 \subsubsection{Stored XSS}
-Suprotno Reflected XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je Stored XSS.\\ Cilj stored XSS-a je da sakrije svoju zlonamernost tako \v{s}to je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i \v{c}eka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
+
+Suprotno Reflected XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je Stored XSS.\\ Cilj stored XSS-a je da sakrije svoju zlonamernost tako što je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i čeka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
+
 \subsubsection{XSS-prevencija}
-Podsetimo, da je glavni problem upravo to \v{s}to pretra\v{z}iva\v{c} renderuje HTML tagove i izvr\v{s}ava javascript kod.  
 
-Re\v{s}enje je da pretra\v{z}iva\v{c} uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao \v{s}to je i prikazano na tabeli \ref{kodiranje}.
+Podsetimo, da je glavni problem upravo to što pretraživač renderuje HTML tagove i izvršava javascript kod.  
 
-Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo preme\v{s}ten sa bezbednosnog na vizuelni).
+Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}.
+
+Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
 
 \begin{table}[ht]
 
@@ -213,18 +218,21 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 \end{table}
 
 \subsection{SQL injekcija}
-\textbf{SQL injekcija} predstavlja jo\v{s} jedan vid napada injektovanjem kodova (ta\v{c}nije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
-\textbf{Problem:} Podaci se \v{s}alju od strane korisnika, a sistem ne zna kako da rukuje sa njima.\\
+
+\textbf{SQL injekcija} predstavlja još jedan vid napada injektovanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+\textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne zna kako da rukuje sa njima.\\
 \textbf{Posledice:} 
 \begin{enumerate}
-	\item neovla\v{s}\'{c}en pristup bazi i njen pregled
-	\item modifikovanje baze izvr\v{s}avanjem upita (brisanje podataka, menjanje...)
+	\item neovlašćen pristup bazi i njen pregled
+	\item modifikovanje baze izvršavanjem upita (brisanje podataka, menjanje...)
 \end{enumerate}
+
 \subsubsection{SQL injekcija-primena}
-Umetanje sql upita, na \v{c}emu se zasniva ovaj metod, naj\v{c}e\v{s}\'{c}e se de\v{s}ava u delu za \textit{Log in}. U primeru \ref{primer2} možemo videti napad u ovoj fazi. Ovo je upro\v{s}\'{c}en primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
+
+Umetanje sql upita, na čemu se zasniva ovaj metod, najčešće se dešava u delu za \textit{Log in}. U primeru \ref{primer2} možemo videti napad u ovoj fazi. Ovo je uprošćen primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
 \begin{primer}
 \label{primer2}
-Pretpostavimo da imamo stranicu, koja nakon uspe\v{s}nog prijavljivanja ispisuje informacije o korisniku (njegovo korisni\v{c}ko ime i lozinku, neke informacije o njemu itd.). Ukoliko su korisnički parametri uneti kao:\\
+Pretpostavimo da imamo stranicu, koja nakon uspešnog prijavljivanja ispisuje informacije o korisniku (njegovo korisničko ime i lozinku, neke informacije o njemu itd.). Ukoliko su korisnički parametri uneti kao:\\
 - IME: "Marko"\\
 - LOZINKA: "passw0rd"\\
 Upit nakon uvrštavanja parametara izgleda:
@@ -234,8 +242,8 @@ Upit nakon uvrštavanja parametara izgleda:
  WHERE username='Marko'
  	AND password='passw0rd'
 \end{lstlisting}
-Uneto ime i lozinka predstavljaju parametre za izvr\v{s}avanje ovog upita.\\\\
-Ako bismo u polje za korisni\v{c}ko ime uneli slede\'{c}e:\\
+Uneto ime i lozinka predstavljaju parametre za izvršavanje ovog upita.\\\\
+Ako bismo u polje za korisničko ime uneli sledeće:\\
 - IME: "hi' OR '1'='1"\\
 - LOZINKA: "hi' OR '1'='1"\\
 Upit bi izgledao sada ovako nakon uvrštavanja parametara:
@@ -245,51 +253,88 @@ FROM baza
 WHERE username='hi' OR '1'='1' 
 	AND password='hi' OR '1'='1'
 \end{lstlisting}
-Primetimo je izraz 1=1 uvek ta\v{c}an pa je deo za korisni\v{c}ko ime i lozinku krajnje irelevantan.\\
-Sistem \'{c}e prijaviti korisnika (naj\v{c}es\'{c}e) sa kredencijalima korisnika koji se nalazi na prvom mestu spiska korisnika iz baze.\\
+Primetimo je izraz 1=1 uvek tačan pa je deo za korisničko ime i lozinku krajnje irelevantan.\\
+Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se nalazi na prvom mestu spiska korisnika iz baze.\\
 \end{primer}
+
 \subsubsection{SQL injekcija-prevencija}
-Solucija koja se name\'{c}e za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisni\v{c}ko ime ili lozinka (konkretno u na\v{s}em primeru). Glavni problem i jeste u kori\v{s}\'{c}enju specijalnih karaktera (kao \v{s}to su = ili ' itd.), te treba navesti sistem da ih igori\v{s}e.\\
-Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od injektivnih napada, uz predloge dodatne za\v{s}tite.
+
+Solucija koja se nameće za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.), te treba navesti sistem da ih igoriše.\\
+Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od injektivnih napada, uz predloge dodatne zaštite.
+
 \subsection{Kontrola pristupa}
-Kontrola pristupa predstavlja filtriranje onoga \v{s}ta korisnik mo\v{z}e da vidi ili sa kojim podacima mo\v{z}e da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje ne\v{c}ega za \v{s}ta ne poseduju prava.\\
-\textbf{Problem:} Razvijaoci pretpostavljaju da, ako ne\v{s}to nije vidljivo korisniku, on ne mo\v{z}e da mu pristupi.\\
-\textbf{Posledica:} Neovla\v{s}\'{c}en pristup podacima ili funkcionalnostima.
+
+Kontrola pristupa predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
+\textbf{Problem:} Razvijaoci pretpostavljaju da, ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
+\textbf{Posledica:} Neovlašćen pristup podacima ili funkcionalnostima.
+
 \subsubsection{Kontrola pristupa-primena}
-Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni na\v{c}in zloupotrebe prava pristupa i svodi se na direktno menjanje parametara url-a.
+
+Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara url-a.
 \begin{primer}
 \label{primer3}
-Pretpostavimo da imamo sajt banke kod koje imamo otvoren ra\v{c}un i nalog na njemu. Nakon uspe\v{s}nog prijavljivanja, url u na\v{s}em pretra\v{z}iva\v{c}u \'{c}e da izgleda ovako:
+Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, url u našem pretraživaču će da izgleda ovako:
 \begin{lstlisting}
 http://banka.com/nalog?id=123
 \end{lstlisting}
-Gde je 123 na\v{s}a reprezentacija sajtu banke. Jednostavnom izmenom '123' na npr. '124' mo\v{z}emo dobiti pregled drugog korisni\v{c}kog naloga (najopasnija promena bi bila sa '123' na '1' jer je to naj\v{c}e\v{s}\'{c}e id admina sa svim pravima pristupa).
+Gde je 123 naša reprezentacija sajtu banke. Jednostavnom izmenom '123' na npr. '124' možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa '123' na '1' jer je to najčešće id admina sa svim pravima pristupa).
 \end{primer}
 \begin{primer}
 \label{primer4}
-Osim pregledanja tuđeg naloga, jeste kori\v{s}\'{c}enje funkcionalnosti za koja nemamo prava.
+Osim pregledanja tuđeg naloga, jeste korišćenje funkcionalnosti za koja nemamo prava.
 
-Pretpostavimo da imamo jo\v{s} i dugme za izmenu profila. Klikom na njega, url \'{c}e izgledati ovako:\\
+Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, url će izgledati ovako:\\
 
 \begin{lstlisting}
 http://banka.com/nalog?id=123&action=izmeniProfil
 \end{lstlisting}
 
-Pretpostavimo da ne mo\v{z}emo mi direktno da izbri\v{s}emo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, ve\'{c} moramo da \v{s}aljemo zahtev adminu da to uradi), mo\v{z}emo da pretpostavimo (nagađamo) da i ostale akcije imaju sli\v{c}ne nazive (npr. action=obrisiProfil) i da im na taj na\v{c}in neovra\v{s}\'{c}eno pristupimo.\\
+Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev adminu da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. action=obrisiProfil) i da im na taj način neovrašćeno pristupimo.\\
 \end{primer}
 U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe kontrole pristupa. Njihova primena se može kombinovati za složenije napade.
-\subsubsection{Kontrola pristupa-prevencija}
-Klju\v{c}na stvar jeste da se provere pristupa (autorizacija) rade na serveru        (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obscurity})). 
 
-Naivni pristup bi bio i da se ta provera de\v{s}ava pri svakoj akciji koju korisnik \v{z}eli da izvr\v{s}i (potvrda korisni\v{c}kog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
+\subsubsection{Kontrola pristupa-prevencija}
+
+Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obscurity})). 
+
+Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
+
+\section{Bezbednost veb servera}
+
+U savremeno doba brojni hakerski napadi nam jasno stavljaju do znanja koliko su serveri \say{ranjivi}, kao i koliko je bitna njihova zaštita. Zaštita same veb aplikacije nam neće biti previše korisna ukoliko nam je server nebezbedan.
+
+Stavke koji su bitne za zaštitu veb servera su:
+\begin{itemize}
+	\item Uklanjanje nepotrebnih servisa
+	\item Udaljeni pristup (eng.~{\em Remote Access})
+	\item Održavanje korisničkih naloga
+	\item Dozvole i privilegije
+	\item Nadgledanje servera
+	\item Odvajanje aplikacija i skriptova
+	\item Razdvajanje razvojnog i test okruženja...
+\end{itemize}
+
+Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb servera i preporučljivo je pridržavati ih se prilikom njegovog održavanja.\\
+
+\textbf{Uklanjanje nepotrebnih servisa} je poželjno jer svaki servis koji se koristi na veb serveru otvara novi priključak (eng.~{\em port}) na njemu. Na taj način se povećava broj slabih tačaka servera, te je ga je teže održavati. Takođe, uklanjanjem nepotrebnih servisa možemo dobiti povećanje performansi kod korišćenih servisa.
+
+\textbf{Udaljeni pristup} koriste administratori za održavanje veb servera. Iako je preporučljivo da se održavanja rade lokalno, nekada to nije moguće te je neophodno imati omogućenu i ovu opciju na veb serveru. Korisno je ovakav pristup serveru ograničiti na samo određene naloge i IP adrese, kako bi se umanjio bezbednosni rizik nastao njegovim omogućavanjem.
+
+\textbf{Održavanje korisničkih naloga}, poput uklanjanja nepotrebnih servisa, umanjuje broj rizičnih tačaka veb servera. Poželjno je ukloniti ili ograničiti privilegije naloga nastalih prilikom konfigurisanja operativnog sistema ili dodatnih aplikacija.
+
+\textbf{Dozvole i privilegije} treba da budu postavljene u skladu sa realnim potrebama korišćenih servisa. Ukoliko privilegije nadmašuju potrebe, zlonameran korisnik to može iskoristiti za neželjene operacije nad informacijama koje se nalaze na serveru.
+
+\textbf{Nadgledanje servera} podrazumeva praćenje izveštaja, kako sistemskih tako i aplikativnih. Na taj način je moguće blagovremeno uočiti neobična ponašanja aplikacija i sprečiti eventualnu zloupotrebu nedostataka, ali i uočiti pokušaje napada.
+
+\textbf{Odvajanje aplikacija i skriptova} od operativnog sistema i drugih sistemskih podataka je vrlo poželjno. Naime, hakeri koji dođu do pristupa korenom direktorijumu često mogu vrlo jednostavno doći i do dovoljno visokih privilegija da slobodno koriste sve funkcije operativnog sistema. Ovim ograničavamo problem nedovoljne bezbednosti aplikacije da ne utiče na druge aplikacije smeštene na tom serveru.
+
+\textbf{Razdvajanje razvojnog i javnog okruženja} pruža dodatnu bezbednost ukoliko razvojno okruženje nije javno dostupno. Veb aplikacije u fazi razvoja često imaju mnogo bezbednosnih nedostataka i ukoliko ti nedostaci postanu javni narušava se bezbednost celokupnog servera. Pogotovu ukoliko aplikacija koja se testira radi sa svim privilegijama, što je česta praksa.
+
 \section{Zaključak}
 
 \addcontentsline{toc}{section}{Literatura}
 \appendix
 \bibliography{seminarski}
 \bibliographystyle{plain}
-
-
-
 
 \end{document}
