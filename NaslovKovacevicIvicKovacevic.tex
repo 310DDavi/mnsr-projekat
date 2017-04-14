@@ -39,6 +39,92 @@
 \newpage
 
 \section{Uvod}
+
+\section{Bezbednost softvera}
+
+Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on nastavi da funkcioniše ispravno čak i pri zlonamernim napadima.
+
+Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurnosti u ranim fazama životnog ciklusa softvera, razumevajući uobičajene pretnje (uključujući i mane programskog jezika), podvrgavajući sve softverske nepravilnosti temeljnoj i objektivnoj analizi rizika i testiranju. Dok softveri koji se razvijaju skoro uvek imaju greške pri implementaciji, utvrđeno je da je sigurnost mnogih sistema narušena zbog mana u dizajnu softverskog rešenja.
+
+Centralni i kritičan aspekt problema sigurnosti softvera je problem u samom softveru. Nedostaci pri implementaciji softvera, poput loših mehanizama kontrole pristupa podacima su česti uzroci koji dovode softver u bezbednosni rizik. 
+
+\subsection{Kontrola pristupa podacima}
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.
+Kontrola pristupa se ostvaruje u tri koraka.
+\begin{itemize}
+                    \item Identifikacija
+                    \item Autentikacija
+                    \item Autorizacija
+\end{itemize} 
+
+\subsubsection{Identifikacija}
+Identifikacija je pretpostavljanje identiteta subjekta. Uobičajeno se odvija na osnovu korisničkog imena, broja računa, ID kartice. Uglavnom nije jedinstvena i sama za sebe predstavlja veoma slab koncept.
+
+\subsubsection{Autentikacija}
+Autentikacija je skup metoda za ustanovljavanje istinitosti saopštenog identiteta. Faktori autentikacije su elementi koji učestvuju u proveri (što je više faktora to je tehnika pouzdanija).
+
+Tehnike autentikacije: 
+    \begin{itemize}
+        \item Memorijski faktori (lozinka, PIN)
+        \item  Biometrijski faktori (visina, težina, otisak prsta, rukopis)
+        \item Fizički faktori (ID kartica, token)
+        \item Logički (neka pravila reagovanja na različite uslove)                                    
+        \item Geografski (Lokacija korisnika)                                
+    \end{itemize}
+
+Daleko najpopularniji mehanizam za autentikaciju ostaje lozinka. Korišćenje lozinke zahteva da sistem ili servis 
+ima mehanizam koji povezuje datu lozinku sa konkretnim korisnikom. Ako ova informacija nije sačuvana na dobar 
+način, postoji mogućnost da će neko drugi sem korisnika dobiti pristup njoj.
+
+Nakon uspešne autentikacije, korisniku mora biti 
+dodeljen kredencijal autentikacije ili token, tako da korisnik 
+ne mora da se ponovo autentikuje svaki put kada hoće da izvrši novi zahtev ili transakciju na sistemu. 
+Istovremeno, ako je napadač u mogućnosti da falsifikuje ove kredencijale ili token, on može lako zaobići 
+mehanizam autentikacije. Jedan od načina zaštite protiv falsifikovanja kredencijala je korišćenje 
+kriptografskih algoritama pri pravljenju kredencijala ili tokena.
+
+
+Sistem za autentikaciju treba da bude dizajniran tako da automatski zahteva ponovnu autentikaciju nakon nekog 
+perioda neaktivnosti ili pre neke kritične operacije.
+Ako sistem za autentikaciju ne ograniči vremenski period za koji će korisnik biti autentikovan onda može 
+da dopusti pristup korisnicima kojima ne bi trebalo. Zamislimo korisnika koji se prijavljuje na javni terminal
+i onda odlazi, pritom zaboravljajući da se odjavi. Ispravno dizajniran sistem za autentikaciju 
+će automatski odjaviti korisnika, nakon nekog perioda neaktivnosti.
+
+
+\subsubsection{Autorizacija}
+Autorizacija predstavlja mehanizam provere prava specifičnog subjekta.
+Samo znanje korisnikovog identiteta može biti nedovoljno za izvršavanje određene operacije, već je neophodno znati koje su njegove privilegije.
+Na primer, kada ATM mašina autentikuje korisnika putem fizičkog faktora (bankovna kartica) i memorijskog faktora (PIN kod),
+to ne znači da je tom korisniku dozvoljeno da podigne proizvoljnu sumu novca sa svog računa. Većina korisnika je autorizovana 
+da podigne sumu novca do neke određene dnevne granice, ili da izvršava neke određene operacije (upit stanja), 
+ali ne i druge (prenos novca van banke) sa ATM-a.
+ 
+Za posebno osetljive operacije, autorizacija možda mora da se ponovo obrati autentikaciji, iako autorizacija počinje tek 
+nakon autentikacije. Autentikacijom od korisnika može biti zahtevano da pruži minimalan ili značajniji dokaz njegovog identiteta. 
+Na primer, prenos sume novca veće od dizajniranog praga prenosa može zahtevati ponovnu autentikaciju, ili veći nivo autorizacije.
+
+Neke politike zahtevaju dvoje ljudi da bi se autorizovala kritična transakcija. U tom slučaju 
+bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke nije dovoljna za ovu svrhu.
+
+\subsection{Eksplicitna provera podataka}
+Softverski sistemi i komponente obično prave pretpostavke o podacima nad kojima rade. Veoma je bitno da se eksplicitno obezbedi da te pretpostavke ustvari važe. Ranjivosti sistema su često prouzrokovane iz implicitnih pretpostavki o podacima, koje mogu biti razotkrivene ako napadač zavara ove pretpostavke.
+Kao takav, bitno je da dizajn softverskog sistema obezbedi da se validacija podataka zaista izvrši i da su sve 
+pretpostavke o podacima potvrđene.
+
+Kako bi se obezbedila kvalitetna validacija podataka, neophodno je koristiti kombinacije sledećih pristupa:
+\begin{itemize}
+ \item \textit{Centralizovani mehanizam za validaciju} - svi podaci koji ulaze u sistem moraju da prođu kroz osnovne korake validacije pre nego što sistem počne da ih upotrebljava
+ \item \textit{Validacija često ponovljenih podataka} - poželjno je koristiti već postojeće biblioteke za provere ispravnosti čestih formata podataka kao što su adrese elektronske pošte
+ \item \textit{Upotreba provere tipova na implementacionom nivou jezika} - često možemo iskoristiti svojstva već postojećih tipova u korišćenom programskom jeziku za provere podataka koje koristimo, kao što je format datuma
+\end{itemize}
+Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosnih rizika, od kojih je jedan ilustrovan u primeru \ref{primer5}
+
+\begin{primer}
+	\label{primer5}
+	Ukoliko se za implementaciju koristi jezik koji nema automatsku kontrolu memorijskog pristupa, poput C programskog jezika, i ne proveri se ispravnost ulaza, može doći do različitih problema, kao što su prekoračenje bafera, pristupanje memoriji van opsega, neispravne niske... Svaki od ovih problema za uzrok ima nasilno prekidanje rada programa.
+\end{primer}
+
 \section{Bezbednost veb servera}
 
 
