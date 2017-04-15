@@ -140,13 +140,12 @@ Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se 
 \textbf{Pretraživač ne predstavlja ograničenje }.\\
 U okrviru ovog rada, razmatrićemo tri najčešće vrste napada i ukazati na sigurnosne rizike na koje se oslanjaju:
 \begin{enumerate}
-	\item Cross-Site Scripting (XSS)
-	\item SQL Injection
-	\item Kontrola pristupa
+	\item Umetanje skriptova (eng.~{\em Cross-Site Scripting})
+	\item Umetanje SQL upita (eng.~{\em Direct Object References})
+	\item Kontrola pristupa (eng.~{\em Access control})
 \end{enumerate}
-\newpage
-\subsection{Cross-Site Scripting (XSS)}
-\textbf{Cross Site Scripting}, poznatiji kao \textbf{XSS}, je napad injekcijom kodova u sajt. Takođe je jedan od najuobičajnih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku javascript-a.\\
+\subsection{Umetanje skriptova (XSS)}
+\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS}\cite{XSS}, je napad injekcijom kodova u sajt. Takođe je jedan od najuobičajnih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku javascript-a.\\
 \textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (searchbox), a ako taj odgovor sadrži neke HTML tagove ili javascript kod, stranica ih renderuje i izvršava kod.\\
 \textbf{Posledice:}
 \begin{enumerate}
@@ -156,9 +155,9 @@ U okrviru ovog rada, razmatrićemo tri najčešće vrste napada i ukazati na sig
 \end{enumerate}
 U nastavku videćemo različite vrste napada tipa XSS.
 
-\subsubsection{Reflected XSS}
+\subsubsection{Refleksivni XSS}
 
-Reflected XSS napad se zasniva na injektovanju izvršnog koda u HTTP odgovor. Sam kod nije sačuvan u okviru aplikacije, već (u naivnim primerima) može biti vidljiv u okviru nadograđenog url-a (kao posledica http odgovora).
+Refleksivni XSS napad se zasniva na injektovanju izvršnog koda u HTTP odgovor. Sam kod nije sačuvan u okviru aplikacije, već (u naivnim primerima) može biti vidljiv u okviru nadograđenog url-a (kao posledica http odgovora).
 \begin{primer}
 \label{primer1}
 Pretpostavimo da imamo jednostavan sajt, čija je uloga da ima jedan searchbox i dugme 'pretraga' (sadržaj onoga što pretražujemo nije bitan za ovaj napad)
@@ -174,7 +173,7 @@ www.sajt.com?key="pretrazujemo"
 \end{lstlisting}
 
 (isti efekat možemo postići i sa unošenjem takvog koda unutar searchbox-a i izvršiti pretragu)
-\item Unošenjem takvog url-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka "123"\\
+\item Unošenjem takvog url-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka \say{123}\\
 
 \end{enumerate}
 \end{primer}
@@ -182,17 +181,19 @@ www.sajt.com?key="pretrazujemo"
  Naravno, primer \ref{primer1} je jednostavan primer bez vidljivih znakova opasnosti, ali na sličnom principu deluju zlonamerni mail-ovi koji nam pristižu ili sajtovi (ili čak korisnici) koji nameću linkove da korisnik klikne na njih.\\
 Način prikrivanja ovakvih napada (jer korisnik može da nasluti iz url-a da je reč o linku ka zlonamernoj strani) jesu URL shortener aplikacije.
 
-\subsubsection{Stored XSS}
+\subsubsection{Sačuvani XSS}
 
-Suprotno Reflected XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je Stored XSS.\\ Cilj stored XSS-a je da sakrije svoju zlonamernost tako što je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i čeka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
+Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je Stored XSS.\\ Cilj stored XSS-a je da sakrije svoju zlonamernost tako što je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i čeka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
 
 \subsubsection{XSS-prevencija}
 
-Podsetimo, da je glavni problem upravo to što pretraživač renderuje HTML tagove i izvršava javascript kod.  
+Fokus u sprečavanju XSS\cite{XSS_prev} napada se oslanja na problem to što pretraživač renderuje HTML tagove i izvršava javascript kod.  
 
 Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}.
 
 Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
+
+Detaljnij
 
 \begin{table}[ht]
 
@@ -219,9 +220,9 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 \end{center}
 \end{table}
 
-\subsection{SQL injekcija}
+\subsection{Umetanje SQL upita}
 
-\textbf{SQL injekcija} predstavlja još jedan vid napada injektovanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+\textbf{Umetanje SQL upita}(eng.~{\em SQL injection})\cite{SQL} predstavlja još jedan vid napada injektovanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
 \textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne zna kako da rukuje sa njima.\\
 \textbf{Posledice:} 
 \begin{enumerate}
@@ -229,14 +230,14 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 	\item modifikovanje baze izvršavanjem upita (brisanje podataka, menjanje...)
 \end{enumerate}
 
-\subsubsection{SQL injekcija-primena}
+\subsubsection{Umetanje SQL upita-primena}
 
-Umetanje sql upita, na čemu se zasniva ovaj metod, najčešće se dešava u delu za \textit{Log in}. U primeru \ref{primer2} možemo videti napad u ovoj fazi. Ovo je uprošćen primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
+Umetanje sql upita najčešće se dešava u delu za \textit{Log in}. U primeru \ref{primer2} možemo videti napad u ovoj fazi. Ovo je uprošćen primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
 \begin{primer}
 \label{primer2}
 Pretpostavimo da imamo stranicu, koja nakon uspešnog prijavljivanja ispisuje informacije o korisniku (njegovo korisničko ime i lozinku, neke informacije o njemu itd.). Ukoliko su korisnički parametri uneti kao:\\
-- IME: "Marko"\\
-- LOZINKA: "passw0rd"\\
+- IME: \say{Marko}\\
+- LOZINKA: \say{passw0rd}\\
 Upit nakon uvrštavanja parametara izgleda:
 \begin{lstlisting}
  SELECT * 
@@ -246,8 +247,8 @@ Upit nakon uvrštavanja parametara izgleda:
 \end{lstlisting}
 Uneto ime i lozinka predstavljaju parametre za izvršavanje ovog upita.\\\\
 Ako bismo u polje za korisničko ime uneli sledeće:\\
-- IME: "hi' OR '1'='1"\\
-- LOZINKA: "hi' OR '1'='1"\\
+- IME: \say{ hi' OR '1'='1 }\\
+- LOZINKA: \say{ hi' OR '1'='1 }\\
 Upit bi izgledao sada ovako nakon uvrštavanja parametara:
 \begin{lstlisting}
 SELECT * 
@@ -255,18 +256,18 @@ FROM baza
 WHERE username='hi' OR '1'='1' 
 	AND password='hi' OR '1'='1'
 \end{lstlisting}
-Primetimo je izraz 1=1 uvek tačan pa je deo za korisničko ime i lozinku krajnje irelevantan.\\
+Primetimo je izraz \say{1=1} uvek tačan pa je deo za korisničko ime i lozinku krajnje irelevantan.\\
 Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se nalazi na prvom mestu spiska korisnika iz baze.\\
 \end{primer}
 
-\subsubsection{SQL injekcija-prevencija}
+\subsubsection{Umetanje SQL upita-prevencija}
 
 Solucija koja se nameće za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.), te treba navesti sistem da ih igoriše.\\
 Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od injektivnih napada, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
-Kontrola pristupa predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
+\textbf{Kontrola pristupa}\cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
 \textbf{Problem:} Razvijaoci pretpostavljaju da, ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
 \textbf{Posledica:} Neovlašćen pristup podacima ili funkcionalnostima.
 
@@ -279,25 +280,24 @@ Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu
 \begin{lstlisting}
 http://banka.com/nalog?id=123
 \end{lstlisting}
-Gde je 123 naša reprezentacija sajtu banke. Jednostavnom izmenom '123' na npr. '124' možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa '123' na '1' jer je to najčešće id admina sa svim pravima pristupa).
+Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id admina sa svim pravima pristupa).
 \end{primer}
+Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje naredni primer.
 \begin{primer}
 \label{primer4}
-Osim pregledanja tuđeg naloga, jeste korišćenje funkcionalnosti za koja nemamo prava.
-
 Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, url će izgledati ovako:\\
 
 \begin{lstlisting}
 http://banka.com/nalog?id=123&action=izmeniProfil
 \end{lstlisting}
 
-Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev adminu da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. action=obrisiProfil) i da im na taj način neovrašćeno pristupimo.\\
+Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev adminu da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. \say{action=obrisiProfil}) i da im na taj način neovrašćeno pristupimo.\\
 \end{primer}
 U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe kontrole pristupa. Njihova primena se može kombinovati za složenije napade.
 
 \subsubsection{Kontrola pristupa-prevencija}
 
-Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obscurity})). 
+Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obsc-urity}\cite{AS})). 
 
 Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
 
