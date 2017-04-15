@@ -40,9 +40,13 @@
 
 \section{Uvod}
 
+Propusti u bezbednosti softvera mogu biti vrlo problematični za informacione sisteme, pogotovu one u komercijalnoj primeni, koji rade sa velikom količinom poverljivih podataka, te je ovo tema koja je vrlo zastupljena u modernom računarstvu. Kako se količina podataka povećava velikom brzinom i sve je veći broj aplikacija koje rade na vebu, očekuje se da značaj ovog problema postaje sve bitniji.
 
+U okviru ovog rada ćemo se susresti sa osnovnim pojmovima i konceptima ovog problema. U odeljku \ref{bezbednost}, koji se tiče bezbednosti softvera, upoznaćemo se sa nekim principima koji se koriste sa ciljem implementacije softvera sa minimalnim brojem bezbednosnih rizika \cite{BIS}. Nakon upoznavanja sa osnovama bezbednosti, u odeljku \ref{aplikacije}, imaćemo priliku da se upoznamo sa nekim od čestih tipova napada na veb aplikacije \cite{SQL, XSS, AC}, kao i načinima za njihovu prevenciju. Kroz primere \ref{primer2}, \ref{primer3} i \ref{primer4}, videćemo pojednostavljene verzije ovih napada na delu.
 
-\section{Bezbednost softvera}
+Prelaskom na odeljak \ref{server}, sa problema bezbednosti aplikacija prećićemo i na problem bezbednosti okruženja na kom se aplikacija izvršava. Dotaćićemo se i smernica za pravilno održavanja servera \cite{WS}. U zaklju\v{c}ku \ref{zakljucak} je dat kratak pregled najbitnijih stavki koje su obrađene u ovom radu, kao i dodatne smernice za dalji nastavak istraživačkog rada. Osim toga, ukratko je opisan i problem koji nastaje ukoliko prevencija zakaže.
+
+\section{Bezbednost softvera} \label{bezbednost}
 
 Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on nastavi da funkcioniše ispravno čak i pri zlonamernim napadima.
 
@@ -51,7 +55,8 @@ Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurn
 U nastavku ćemo govoriti o principima bezbednosti softvera. Kako je ova oblast prilično široka, pomenućemo samo one najvažnije.
 
 \subsection{Kontrola pristupa podacima}
-Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.\cite{BIS}
+
 Kontrola pristupa se ostvaruje u tri koraka.
 \begin{itemize}
 	\item Identifikacija
@@ -83,7 +88,7 @@ dodeljen kredencijal autentikacije ili token, tako da korisnik
 ne mora da se ponovo autentikuje svaki put kada hoće da izvrši novi zahtev ili transakciju na sistemu. 
 Istovremeno, ako je napadač u mogućnosti da falsifikuje ove kredencijale ili token, on može lako zaobići 
 mehanizam autentikacije. Jedan od načina zaštite protiv falsifikovanja kredencijala je korišćenje 
-kriptografskih algoritama pri pravljenju kredencijala ili tokena.
+kriptografskih algoritama pri pravljenju kredencijala ili tokena.\cite{Top10}
 
 Sistem za autentikaciju treba da bude dizajniran tako da automatski zahteva ponovnu autentikaciju nakon nekog 
 perioda neaktivnosti ili pre neke kritične operacije.
@@ -110,7 +115,7 @@ bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke n
 \subsection{Eksplicitna provera podataka}
 Softverski sistemi i komponente obično prave pretpostavke o podacima nad kojima rade. Veoma je bitno da se eksplicitno obezbedi da te pretpostavke ustvari važe. Ranjivosti sistema su često prouzrokovane iz implicitnih pretpostavki o podacima, koje mogu biti razotkrivene ako napadač zavara ove pretpostavke.
 Kao takav, bitno je da dizajn softverskog sistema obezbedi da se validacija podataka zaista izvrši i da su sve 
-pretpostavke o podacima potvrđene.
+pretpostavke o podacima potvrđene.\cite{Top10Flaws}
 
 Kako bi se obezbedila kvalitetna validacija podataka, neophodno je koristiti kombinacije sledećih pristupa:
 \begin{itemize}
@@ -125,7 +130,7 @@ Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosni
 	Ukoliko se za implementaciju koristi jezik koji nema automatsku kontrolu memorijskog pristupa, poput C programskog jezika, i ne proveri se ispravnost ulaza, može doći do različitih problema, kao što su prekoračenje bafera, pristupanje memoriji van opsega, neispravne niske... Svaki od ovih problema za uzrok ima nasilno prekidanje rada programa.
 \end{primer}
 
-\section{Bezbednost veb aplikacija}
+\section{Bezbednost veb aplikacija} \label{aplikacije}
 
 Sa pojavom Veb 2.0, povećanjem deljenja informacija preko socijalnih mreža i korišćenjem veba kao sredstva poslovanja i pružanja različitih informacija bezbednost sajtova često biva ugrožena upadima od strane zlonamernih programera.
 
@@ -262,7 +267,7 @@ Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se 
 
 \subsubsection{Umetanje SQL upita-prevencija}
 
-Solucija koja se nameće za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.), te treba navesti sistem da ih igoriše.\\
+Solucija koja se nameće za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.)\cite{SQL_prev}, te treba navesti sistem da ih igoriše.\\
 Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od injektivnih napada, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
@@ -301,7 +306,7 @@ Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbe
 
 Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
 
-\section{Bezbednost veb servera}
+\section{Bezbednost veb servera} \label{server}
 
 U savremeno doba brojni hakerski napadi nam jasno stavljaju do znanja koliko su serveri \say{ranjivi}, kao i koliko je bitna njihova zaštita. Zaštita same veb aplikacije nam neće biti previše korisna ukoliko nam je server nebezbedan.
 
@@ -332,7 +337,7 @@ Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb s
 
 \textbf{Razdvajanje razvojnog i javnog okruženja} pruža dodatnu bezbednost ukoliko razvojno okruženje nije javno dostupno. Veb aplikacije u fazi razvoja često imaju mnogo bezbednosnih nedostataka i ukoliko ti nedostaci postanu javni narušava se bezbednost celokupnog servera. Pogotovu ukoliko aplikacija koja se testira radi sa svim privilegijama, što je česta praksa.
 
-\section{Zaključak}
+\section{Zaključak} \label{zakljucak}
 
 Predstavili smo različite principe i preporuke za pisanje bezbednog softvera i pripremanje okruženja za neometano funkcionisanje aplikacije. Da rezimiramo:
 \begin{itemize}
