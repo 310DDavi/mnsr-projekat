@@ -25,14 +25,14 @@
 
 \begin{document}
 
-\title{Naslov\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+\title{Propusti u bezbednosti softvera i prevencija njihove zloupotrebe\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
-\author{Aleksandra Kovačević, David Ivić, Sreten Kovačević\\ aleksandrakovacevic099@gmail.com, 310ddavi@gmail.com,\\ sretenkvcvc94@gmail.com}
+\author{Aleksandra Kovačević, David Ivić, Sreten Kovačević\\ mi13302@matf.bg.ac.rs, 310ddavi@gmail.com, mi13097@matf.bg.ac.rs}
 \date{26.~mart 2015.}
+
 \maketitle
 
-\abstract{
-}
+\abstract{Ovaj rad pruža osnovne informacije o bezbednosti softvera, posledicama koje nastaju usled njenog zanemarivanja i načinima prevenecije njenih zloupotreba. Takođe, prikazana je i potreba za adekvatnom bezbednošću celog sistema, a ne samo aplikacija. Kroz primere su, na praktičan način, prikazani razlozi i preporuke za implementaciju bezbednog softvera.}
 
 \tableofcontents
 
@@ -40,13 +40,15 @@
 
 \section{Uvod}
 
+
+
 \section{Bezbednost softvera}
 
 Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on nastavi da funkcioniše ispravno čak i pri zlonamernim napadima.
 
 Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurnosti u ranim fazama životnog ciklusa softvera, razumevajući uobičajene pretnje (uključujući i mane programskog jezika), podvrgavajući sve softverske nepravilnosti temeljnoj i objektivnoj analizi rizika i testiranju. Dok softveri koji se razvijaju skoro uvek imaju greške pri implementaciji, utvrđeno je da je sigurnost mnogih sistema narušena zbog mana u dizajnu softverskog rešenja.
 
-Centralni i kritičan aspekt problema sigurnosti softvera je problem u samom softveru. Nedostaci pri implementaciji softvera, poput loših mehanizama kontrole pristupa podacima su česti uzroci koji dovode softver u bezbednosni rizik. 
+U nastavku ćemo govoriti o principima bezbednosti softvera. Kako je ova oblast prilično široka, pomenućemo samo one najvažnije.
 
 \subsection{Kontrola pristupa podacima}
 Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.
@@ -332,9 +334,29 @@ Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb s
 
 \section{Zaključak}
 
-\addcontentsline{toc}{section}{Literatura}
+Predstavili smo različite principe i preporuke za pisanje bezbednog softvera i pripremanje okruženja za neometano funkcionisanje aplikacije. Da rezimiramo:
+\begin{itemize}
+	\item neophodno je voditi računa o kontroli pristupa podacima,
+	\item svaki podatak dostupan aplikaciji neophodno je detaljno proveriti i pripremiti za korišćenje,
+	\item posebnu pažnju obratiti na podatke dobijene od korisnika,
+	\item ništa ne pretpostavljati i sve potvrditi,
+	\item mora se obezbediti da mogućnosti korisnika budu jasno i striktno definisane,
+	\item ukoliko okruženje u kom se aplikacija izvršava nije bezbedno - nije bezbedna ni aplikacija.
+\end{itemize}
+
+Bitno je napomenuti da nijedan softver nikada nije potpuno bezbedan, te se mora unapređivati. Takođe, sve navedeno u prethodnim poglavljima ne garantuje bezbednost, ali u velikoj meri smanjuje rizik od pojavljivanja propusta i predstavlja dobru praksu prilikom izrade softvera.
+
+Treba imati u vidu i da u slučaju da prevencije ne daju željene rezultate i da napad bude uspešan, uglavnom su mogućnosti administratora dosta male. U tim slučajevima je prvi zadatak uočiti napad, što nije uvek tako jednostavno, pogotovu ukoliko je meta napada poverljivost informacija. Tada, glavnu ulogu ima provera sistemskih i aplikativnih izveštaja.
+
+Nakon detekcije napada, ponekad je potrebno server/radnu stanicu isključiti sa mreže i izvršiti temeljan pregled sistema, ukloniti posledice napada, ali i propust koji ga je omogućio. Tek nakon što smo uvereni da je okruženje spremno za upotrebu, ponovo vršimo povezivanje na mrežu.
+
+Dalje istraživanje može se usmeriti ka detaljnijoj analizi drugih aspekata narušavanja bezbednosti i njihove prevencije koji nisu navedeni u ovom radu zarad korigovanja kompleksnosti. Takođe, pažnja se može više posvetiti samim posledicama napada, odnosno akcijama potrebnim za oporavak i vraćanje sistema u prvobitno stanje.
+
+
+\nocite{*}
 \appendix
-\bibliography{seminarski}
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{literatura}
 \bibliographystyle{plain}
 
 \end{document}
