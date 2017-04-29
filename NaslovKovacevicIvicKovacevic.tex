@@ -32,7 +32,7 @@
 
 \maketitle
 
-\abstract{Ovaj rad pruža osnovne informacije o bezbednosti softvera, posledicama koje nastaju usled njenog zanemarivanja i načinima prevenecije njenih zloupotreba. Takođe, prikazana je i potreba za adekvatnom bezbednošću celog sistema, a ne samo aplikacija. Kroz primere su, na praktičan način, prikazani razlozi i preporuke za implementaciju bezbednog softvera.}
+\abstract{Ovaj rad pruža osnovne informacije o bezbednosti softvera, posledicama koje nastaju usled njenog zanemarivanja i načinima prevencije njenih zloupotreba. Takođe, prikazana je i potreba za adekvatnom bezbednošću celog sistema, a ne samo aplikacija. Kroz primere su, na praktičan način, prikazani razlozi i preporuke za implementaciju bezbednog softvera.}
 
 \tableofcontents
 
@@ -44,7 +44,7 @@ Propusti u bezbednosti softvera mogu biti vrlo problematični za informacione si
 
 U okviru ovog rada ćemo se susresti sa osnovnim pojmovima i konceptima ovog problema. U odeljku \ref{bezbednost}, koji se tiče bezbednosti softvera, upoznaćemo se sa nekim principima koji se koriste sa ciljem implementacije softvera sa minimalnim brojem bezbednosnih rizika \cite{BIS}. Nakon upoznavanja sa osnovama bezbednosti, u odeljku \ref{aplikacije}, imaćemo priliku da se upoznamo sa nekim od čestih tipova napada na veb aplikacije \cite{SQL, XSS, AC}, kao i načinima za njihovu prevenciju. Kroz primere \ref{primer2}, \ref{primer3} i \ref{primer4}, videćemo pojednostavljene verzije ovih napada na delu.
 
-Prelaskom na odeljak \ref{server}, sa problema bezbednosti aplikacija prećićemo i na problem bezbednosti okruženja na kom se aplikacija izvršava. Dotaćićemo se i smernica za pravilno održavanja servera \cite{WS}. U zaklju\v{c}ku \ref{zakljucak} je dat kratak pregled najbitnijih stavki koje su obrađene u ovom radu, kao i dodatne smernice za dalji nastavak istraživačkog rada. Osim toga, ukratko je opisan i problem koji nastaje ukoliko prevencija zakaže.
+Prelaskom na odeljak \ref{server}, sa problema bezbednosti aplikacija preći ćemo i na problem bezbednosti okruženja na kom se aplikacija izvršava. Dotaći ćemo se i smernica za pravilno održavanja servera \cite{WS}. U zaklju\v{c}ku \ref{zakljucak} je dat kratak pregled najbitnijih stavki koje su obrađene u ovom radu, kao i dodatne smernice za dalji nastavak istraživačkog rada. Osim toga, ukratko je opisan i problem koji nastaje ukoliko prevencija zakaže.
 
 \section{Bezbednost softvera} \label{bezbednost}
 
@@ -127,34 +127,34 @@ Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosni
 
 \begin{primer}
 	\label{primer5}
-	Ukoliko se za implementaciju koristi jezik koji nema automatsku kontrolu memorijskog pristupa, poput C programskog jezika, i ne proveri se ispravnost ulaza, može doći do različitih problema, kao što su prekoračenje bafera, pristupanje memoriji van opsega, neispravne niske... Svaki od ovih problema za uzrok ima nasilno prekidanje rada programa.
+	Ukoliko se za implementaciju koristi jezik koji nema automatsku kontrolu memorijskog pristupa, poput C programskog jezika, i ne proveri se ispravnost ulaza, može doći do različitih problema, kao što su prekoračenje bafera, pristupanje memoriji van opsega, neispravne niske... Svaki od ovih problema za uzrok može imati nasilno prekidanje rada programa, što je najpovoljnije u cilju bezbednosti. Na taj način napadač je sprečen da proširuje svoj napad (u slučaju da se program ne prekine, već da se nađe u nekom stanju greške, napadač može zaobići bezbednosne mehanizme, vršiti izmene podataka...).
 \end{primer}
 
 \section{Bezbednost veb aplikacija} \label{aplikacije}
 
-Sa pojavom Veb 2.0, povećanjem deljenja informacija preko socijalnih mreža i korišćenjem veba kao sredstva poslovanja i pružanja različitih informacija bezbednost sajtova često biva ugrožena upadima od strane zlonamernih programera.
+Sa pojavom Veb 2.0, povećanjem deljenja informacija preko socijalnih mreža i korišćenjem veba kao sredstva poslovanja i pružanja različitih informacija, bezbednost sajtova često biva ugrožena upadima od strane zlonamernih programera.
 
 Zlonamerni programeri (u daljem tekstu hakeri) ili nastoje da kompromituju korporativnu mrežu ili navode krajnje korisnike koji joj pristupaju ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi-virusi). Kao rezultat toga, industrija obraća veliku pažnju na bezbednost samih veb aplikacija, pored bezbednosti osnovne računarske mreže i operativnih sistema.
 
-Bezbednost veba je grana bezbednosti informacija koja se bavi bezbednošću veb sajtova, veb aplikacija i veb servera. \textbf{Bezbednost veb aplikacija} se oslanja na principe bezbednosti aplikacija uopšte, ali ih primenjuje specifično za internet i veb sisteme.
+Bezbednost veba je grana bezbednosti informacija koja se bavi bezbednošću veb sajtova, veb aplikacija i veb servera. Bezbednost veb aplikacija se oslanja na principe bezbednosti aplikacija uopšte, ali ih primenjuje specifično za Internet i veb sisteme.
 Bezbednost veb servera je zaštita informacija dostupnih preko veb servera. Te informacije se mogu ugroziti povećanim sigurnosnim rizicima i propustima prilikom implementacije.
 
-\subsection{Sigurosni rizici}
+\subsection{Sigurnosni rizici}
 
 Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se razmišlja o zaštiti veb aplikacije, ne sme se voditi mišlju: sve što je prikazano, biva naše ograničenje onoga što možemo da učinimo. Sve što predstavlja klijentsku stranu, i ograničenja koja su pomoću nje nametnuta, se veoma lako mogu zaobići.
 \textbf{Pretraživač ne predstavlja ograničenje }.\\
-U okrviru ovog rada, razmatrićemo tri najčešće vrste napada i ukazati na sigurnosne rizike na koje se oslanjaju:
+U okrviru ovog rada, razmatraćemo tri najinteresantnije vrste napada iz ugla zloupotrebe propusta u dizajnu aplikacija:
 \begin{enumerate}
 	\item Umetanje skriptova (eng.~{\em Cross-Site Scripting})
 	\item Umetanje SQL upita (eng.~{\em Direct Object References})
 	\item Kontrola pristupa (eng.~{\em Access control})
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
-\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS}\cite{XSS}, je napad injekcijom kodova u sajt. Takođe je jedan od najuobičajnih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku javascript-a.\\
+\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS}\cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku javascript-a.\\
 \textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (searchbox), a ako taj odgovor sadrži neke HTML tagove ili javascript kod, stranica ih renderuje i izvršava kod.\\
 \textbf{Posledice:}
 \begin{enumerate}
-	\item krađa ID-a sesije i sasim tim krađa korisnikovog indentitea (u cilju obavljanja poslova u ime tog korisnika)
+	\item krađa ID-a sesije i sasim tim krađa korisnikovog identiteta (u cilju obavljanja poslova u ime tog korisnika)
 	\item kontrola stranice (blokiranje rada, menjanje pojedinačnih elemenata...)
 	\item redirekcija na drugu, zlonamernu stranicu
 \end{enumerate}
@@ -162,12 +162,12 @@ U nastavku videćemo različite vrste napada tipa XSS.
 
 \subsubsection{Refleksivni XSS}
 
-Refleksivni XSS napad se zasniva na injektovanju izvršnog koda u HTTP odgovor. Sam kod nije sačuvan u okviru aplikacije, već (u naivnim primerima) može biti vidljiv u okviru nadograđenog url-a (kao posledica http odgovora).
+Refleksivni XSS napad se zasniva na umetanju izvršnog koda u HTTP odgovor. Sam kod nije sačuvan u okviru aplikacije, već (u naivnim primerima) može biti vidljiv u okviru nadograđenog URL-a (eng.~{\em Uniform Resource Locator}), kao posledica HTTP odgovora.
 \begin{primer}
 \label{primer1}
 Pretpostavimo da imamo jednostavan sajt, čija je uloga da ima jedan searchbox i dugme 'pretraga' (sadržaj onoga što pretražujemo nije bitan za ovaj napad)
 \begin{enumerate}
-\item nakon bilo kakve pretrage, promeniće nam se url: 
+\item nakon bilo kakve pretrage, promeniće nam se URL: 
 \begin{lstlisting}
 www.sajt.com?key="pretrazujemo"
 \end{lstlisting}
@@ -178,17 +178,17 @@ www.sajt.com?key="pretrazujemo"
 \end{lstlisting}
 
 (isti efekat možemo postići i sa unošenjem takvog koda unutar searchbox-a i izvršiti pretragu)
-\item Unošenjem takvog url-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka \say{123}\\
+\item Unošenjem takvog URL-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka \say{123}\\
 
 \end{enumerate}
 \end{primer}
 
  Naravno, primer \ref{primer1} je jednostavan primer bez vidljivih znakova opasnosti, ali na sličnom principu deluju zlonamerni mail-ovi koji nam pristižu ili sajtovi (ili čak korisnici) koji nameću linkove da korisnik klikne na njih.\\
-Način prikrivanja ovakvih napada (jer korisnik može da nasluti iz url-a da je reč o linku ka zlonamernoj strani) jesu URL shortener aplikacije.
+Način prikrivanja ovakvih napada (jer korisnik može da nasluti iz URL-a da je reč o linku ka zlonamernoj strani) jesu aplikacije za skraćivanje URL-a (eng.~{\em URL shortener})\footnote{Skraćivač URL-a se koristi za skraćivanje njegove dužine, izmenjen zapis, a pritom ne menjajući lokaciju (resurs) na koji referiše.}
 
 \subsubsection{Sačuvani XSS}
 
-Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je Stored XSS.\\ Cilj stored XSS-a je da sakrije svoju zlonamernost tako što je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i čeka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
+Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosno unutar njenog koda je sačuvani XSS (eng.~{\em Stored XSS}).\\ Cilj sačuvanog XSS-a je da sakrije svoju zlonamernost tako što je javan. Najprostiji primer jeste da u okviru napadnute aplikacije, haker ostavi link ka zlonamernoj stranici i čeka se na korisnika (bilo kog koji nailazi na taj sajt) klikne na njega.
 
 \subsubsection{XSS-prevencija}
 
@@ -198,7 +198,6 @@ Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enko
 
 Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
 
-Detaljnij
 
 \begin{table}[ht]
 
@@ -227,8 +226,8 @@ Detaljnij
 
 \subsection{Umetanje SQL upita}
 
-\textbf{Umetanje SQL upita}(eng.~{\em SQL injection})\cite{SQL} predstavlja još jedan vid napada injektovanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
-\textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne zna kako da rukuje sa njima.\\
+\textbf{Umetanje SQL upita}(eng.~{\em SQL injection})\cite{SQL} predstavlja još jedan vid napada umetanje kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+\textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne rukuje sa njima na pravilan način.\\
 \textbf{Posledice:} 
 \begin{enumerate}
 	\item neovlašćen pristup bazi i njen pregled
@@ -237,7 +236,7 @@ Detaljnij
 
 \subsubsection{Umetanje SQL upita-primena}
 
-Umetanje sql upita najčešće se dešava u delu za \textit{Log in}. U primeru \ref{primer2} možemo videti napad u ovoj fazi. Ovo je uprošćen primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
+Umetanje SQL upita se može vršiti u bilo kom delu aplikacije koja u pozadini izvršava neki upit (najčešće je to deo za \textit{Log in}, pretraga u okviru sajta, učitavanje podataka iz spoljašnjih izvora itd.). U primeru \ref{primer2} možemo videti napad u fazi prijavljivanja korisnika. Ovo je uprošćen primer, ali svi komplikovaniji se zasnivaju na istoj ideji.
 \begin{primer}
 \label{primer2}
 Pretpostavimo da imamo stranicu, koja nakon uspešnog prijavljivanja ispisuje informacije o korisniku (njegovo korisničko ime i lozinku, neke informacije o njemu itd.). Ukoliko su korisnički parametri uneti kao:\\
@@ -267,8 +266,8 @@ Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se 
 
 \subsubsection{Umetanje SQL upita-prevencija}
 
-Solucija koja se nameće za SQL injekciju, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.)\cite{SQL_prev}, te treba navesti sistem da ih igoriše.\\
-Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od injektivnih napada, uz predloge dodatne zaštite.
+Solucija koja se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.)\cite{SQL_prev}, te treba navesti sistem da ih igoriše.\cite{Sanit}\\
+Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
@@ -278,10 +277,10 @@ Takođe postoje i sofveri namenjeni proveri \say{ranjivost} veb aplikacije od in
 
 \subsubsection{Kontrola pristupa-primena}
 
-Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara url-a.
+Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara URL-a.
 \begin{primer}
 \label{primer3}
-Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, url u našem pretraživaču će da izgleda ovako:
+Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, URL u našem pretraživaču će da izgleda ovako:
 \begin{lstlisting}
 http://banka.com/nalog?id=123
 \end{lstlisting}
@@ -290,7 +289,7 @@ Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123
 Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje naredni primer.
 \begin{primer}
 \label{primer4}
-Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, url će izgledati ovako:\\
+Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, URL će izgledati ovako:\\
 
 \begin{lstlisting}
 http://banka.com/nalog?id=123&action=izmeniProfil
@@ -323,9 +322,9 @@ Stavke koji su bitne za zaštitu veb servera su:
 
 Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb servera i preporučljivo je pridržavati ih se prilikom njegovog održavanja.\\
 
-\textbf{Uklanjanje nepotrebnih servisa} je poželjno jer svaki servis koji se koristi na veb serveru otvara novi priključak (eng.~{\em port}) na njemu. Na taj način se povećava broj slabih tačaka servera, te je ga je teže održavati. Takođe, uklanjanjem nepotrebnih servisa možemo dobiti povećanje performansi kod korišćenih servisa.
+\textbf{Uklanjanje nepotrebnih servisa} je poželjno jer svaki servis koji se koristi na veb serveru otvara novi priključak (eng.~{\em port}) na njemu. Na taj način se povećava broj slabih tačaka servera, te ga je teže održavati. Takođe, uklanjanjem nepotrebnih servisa možemo dobiti povećanje performansi kod korišćenih servisa.
 
-\textbf{Udaljeni pristup} koriste administratori za održavanje veb servera. Iako je preporučljivo da se održavanja rade lokalno, nekada to nije moguće te je neophodno imati omogućenu i ovu opciju na veb serveru. Korisno je ovakav pristup serveru ograničiti na samo određene naloge i IP adrese, kako bi se umanjio bezbednosni rizik nastao njegovim omogućavanjem.
+\textbf{Udaljeni pristup} koriste administratori za održavanje veb servera. Iako je preporučljivo da se održavanja rade lokalno, nekada to nije moguće, te je neophodno imati omogućenu i ovu opciju na veb serveru. Korisno je ovakav pristup serveru ograničiti na samo određene naloge i IP adrese, kako bi se umanjio bezbednosni rizik nastao njegovim omogućavanjem.
 
 \textbf{Održavanje korisničkih naloga}, poput uklanjanja nepotrebnih servisa, umanjuje broj rizičnih tačaka veb servera. Poželjno je ukloniti ili ograničiti privilegije naloga nastalih prilikom konfigurisanja operativnog sistema ili dodatnih aplikacija.
 
