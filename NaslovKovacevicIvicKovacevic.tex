@@ -25,7 +25,7 @@
 
 \begin{document}
 
-\title{Propusti u bezbednosti softvera i prevencija njihove zloupotrebe\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+\title{Propusti u bezbednosti veb aplikacija i prevencija njihove zloupotrebe\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
 \author{Aleksandra Kovačević, David Ivić, Sreten Kovačević\\ mi13302@matf.bg.ac.rs, 310ddavi@gmail.com, mi13097@matf.bg.ac.rs}
 \date{26.~mart 2015.}
@@ -52,10 +52,12 @@ Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on 
 
 Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurnosti u ranim fazama životnog ciklusa softvera, razumevajući uobičajene pretnje (uključujući i mane programskog jezika), podvrgavajući sve softverske nepravilnosti temeljnoj i objektivnoj analizi rizika i testiranju. Dok softveri koji se razvijaju skoro uvek imaju greške pri implementaciji, utvrđeno je da je sigurnost mnogih sistema narušena zbog mana u dizajnu softverskog rešenja.
 
-U nastavku ćemo govoriti o principima bezbednosti softvera. Kako je ova oblast prilično široka, pomenućemo samo one najvažnije.
+U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako je ova oblast prilično široka, pomenućemo samo one najvažnije. Fokus će biti na veb aplikacijama. Bitno je napomenuti da neće biti reči o operativnim sistemima, antivirusnoj zaštiti i zaštitnom zidu, koji su bitni aspekti bezbednosti sistema, ali nisu direktno vezani za dizajn softvera.
 
 \subsection{Kontrola pristupa podacima}
-Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama.\cite{BIS}
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do neautorizovanog pristupa, upotrebe, menjanja, uništavanja kao i sprečavanja raspoloživosti.
+
+Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).\cite{BIS}
 
 Kontrola pristupa se ostvaruje u tri koraka.
 \begin{itemize}
@@ -111,6 +113,14 @@ Na primer, prenos sume novca veće od dizajniranog praga prenosa može zahtevati
 
 Neke politike zahtevaju dvoje ljudi da bi se autorizovala kritična transakcija. U tom slučaju 
 bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke nije dovoljna za ovu svrhu.
+
+\subsection{Kriptovanje podataka}
+Kriptografija\cite{CRYP} je grana matematike koja se zasniva na zaštiti podataka kroz njihovu transformaciju. Predstavlja veoma bitan alat koji se koristi u mnogim bezbednosnim aspektima. Na primer, primena kriptografije može doprineti obezbeđivanju integriteta i poverljivosti podataka i implementaciji naprednih metoda autentikacije korisnika.
+
+Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu kljča i agoritma se  vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
+
+Ovu oblast nećemo detaljnije obrađivati u okiru ovog rada.
+
 
 \subsection{Eksplicitna provera podataka}
 Softverski sistemi i komponente obično prave pretpostavke o podacima nad kojima rade. Veoma je bitno da se eksplicitno obezbedi da te pretpostavke ustvari važe. Ranjivosti sistema su često prouzrokovane iz implicitnih pretpostavki o podacima, koje mogu biti razotkrivene ako napadač zavara ove pretpostavke.
@@ -266,12 +276,12 @@ Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se 
 
 \subsubsection{Umetanje SQL upita-prevencija}
 
-Solucija koja se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.)\cite{SQL_prev}, te treba navesti sistem da ih igoriše.\cite{Sanit}\\
+Solucija koja se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.)\cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
 Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
-\textbf{Kontrola pristupa}\cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
+Kontrola pristupa\cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
 \textbf{Problem:} Razvijaoci pretpostavljaju da, ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
 \textbf{Posledica:} Neovlašćen pristup podacima ili funkcionalnostima.
 
@@ -304,6 +314,21 @@ U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe
 Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obsc-urity}\cite{AS})). 
 
 Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
+
+\subsection{Onemogućavanje usluge}
+Onemogućavanje usluge (eng.~{\em Denial of Service - DoS)} \cite{DoSM} predstavlja pokušaj da se neki resurs učini neraspoloživim. Cilj ovog napada nije da omogući pristup ili kontrolu nad udaljenim sistemom već da zauzimanjem svih komunikacionih kapaciteta onemoguće pristup sistemu od strane regularnih korisnika.
+
+Napad se ostvaruje zatrpavanjem usluge mnoštvom zahteva. U jednostavnim slučajevima, napad se izvodi sa jednog uređaja, dok u složenijim može biti koordiniran napad sa više njih (eng.~{\em Distributed Denial of Service - DDoS)}.
+
+Prevencija ovog tipa napada se može implementirati na nivou mreže. Na primer, na nivou zaštitnog zida se može blokirati saobraćaj uređaja sa kog se šalju sumnjivi zahtevi. Još jedan vid prevencije bi bilo nadgledanje mreže i vođenje statistike o prosečnom broju pristiglih zahteva i reagovanje u odnosu na nagle promene.
+
+Ipak, u većini slučajeva  na napad je teško reagovati i pored svih vidova prevencije. Često je neophodno isključivanje servera sa mreže i ponovno pokretanje usluga na njemu.
+
+Neki od čestih tipova napada onemogućavanja usluge su: \cite{DoS}
+\begin{itemize}
+	\item Prekoračenje bafera - hakeri koriste propust u programu zbog kog podaci koji prekoračuju dužinu bafera budu upisani u drugi bafer, što može dovesti do pada sistema;
+	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čeka se zahtev legitimnih korisnika nikada ne obrađuje...
+\end{itemize}
 
 \section{Bezbednost veb servera} \label{server}
 
