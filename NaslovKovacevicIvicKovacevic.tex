@@ -171,7 +171,7 @@ U okrviru ovog rada, razmatraćemo tri najinteresantnije vrste napada iz ugla zl
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
 \textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS} \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer većina sajtova zahteva od korisničkog pretraživača podršku Javascript-a.\\
-\textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (searchbox), a ako taj odgovor sadrži neke HTML tagove ili Javascript kod, stranica ih renderuje i izvršava kod.\\
+\textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (npr. polje za pretragu (eng.~{\em searchbox})), a ako taj odgovor sadrži neke HTML tagove ili Javascript kod, stranica ih renderuje i izvršava kod.\\
 \textbf{Posledice:}
 \begin{enumerate}
 	\item krađa ID-a sesije i samim tim krađa korisnikovog identiteta (u cilju obavljanja poslova u ime tog korisnika)
@@ -244,7 +244,7 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 
 \subsection{Umetanje SQL upita}
 
-\textbf{Umetanje SQL upita}(eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+Umetanje SQL upita (eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
 \textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne rukuje sa njima na pravilan način.\\
 \textbf{Posledice:} 
 \begin{enumerate}
@@ -291,7 +291,7 @@ Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od 
 
 \subsection{Kontrola pristupa}
 
-\textbf{Kontrola pristupa} \cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
+Kontrola pristupa \cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
 \textbf{Problem:} Razvijaoci pretpostavljaju da, ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
 \textbf{Posledica:} Neovlašćen pristup podacima ili funkcionalnostima.
 
@@ -300,7 +300,7 @@ Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od 
 Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara URL-a.
 \begin{primer}
 \label{primer3}
-Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, url u našem pretraživaču izgledaće ovako:
+Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, URL u našem pretraživaču izgledaće ovako:
 
 \texttt{http://banka.com/nalog?id=123}\\
 Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id admina sa svim pravima pristupa).
@@ -310,7 +310,7 @@ Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koj
 
 \begin{primer}
 \label{primer4}
-Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, url će izgledati ovako:
+Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, URL će izgledati ovako:
 
 \texttt{http://banka.com/nalog?id=123\&{}action=izmeniProfil}\\
 Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev adminu da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. \say{action=obrisiProfil}) i da im na taj način neovlašćeno pristupimo.\\
