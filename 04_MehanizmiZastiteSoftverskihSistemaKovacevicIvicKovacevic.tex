@@ -47,7 +47,7 @@ Prelaskom na odeljak \ref{server}, sa problema bezbednosti aplikacija preći će
 
 \section{Bezbednost softvera} \label{bezbednost}
 
-Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on nastavi da funkcioniše ispravno čak i pri zlonamernim napadima.
+Bezbednost softvera je ideja pri konstruisanju softvera, koja podrazumeva da on nastavi da funkcioniše ispravno čak i u specijalnim situacijama. Specijalne situacije mogu se odnositi kako na zlonamerne napade, tako i na nepravilno korišćenje aplikacije od strane nestručnog korisnika.
 
 Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurnosti u ranim fazama životnog ciklusa softvera, razumevajući uobičajene pretnje (uključujući i mane programskog jezika), podvrgavajući sve softverske nepravilnosti temeljnoj i objektivnoj analizi rizika i testiranju. Dok softveri koji se razvijaju uglavnom imaju greške pri implementaciji, utvrđeno je da je sigurnost mnogih sistema narušena zbog mana u dizajnu softverskog rešenja.
 
@@ -170,7 +170,7 @@ U okrviru ovog rada, razmatraćemo tri najinteresantnije vrste napada iz ugla zl
 	\item Kontrola pristupa (eng.~{\em Access control})
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
-\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS} \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer većina sajtova zahteva od korisničkog pretraživača podršku Javascript-a.\\
+Umetanje skriptova, poznatiji kao XSS \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer većina sajtova zahteva od korisničkog pretraživača podršku Javascript-a.\\
 \textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (npr. polje za pretragu (eng.~{\em searchbox})), a ako taj odgovor sadrži neke HTML tagove ili Javascript kod, stranica ih renderuje i izvršava kod.\\
 \textbf{Posledice:}
 \begin{enumerate}
@@ -187,7 +187,7 @@ Refleksivni XSS (eng.~{\em Reflected XSS}) napad se zasniva na umetanju izvršno
 \label{primer1}
 Pretpostavimo da imamo jednostavan sajt, čija je uloga da ima jedno polje za unos i dugme 'pretraga' (sadržaj onoga što pretražujemo nije bitan za ovaj napad)
 \begin{enumerate}
-\item nakon bilo kakve pretrage, promeniće nam se URL: 
+\item nakon bilo kakve pretrage, promeniće nam se URL:\\
 \texttt{www.sajt.com?key="pretrazujemo"}
 \item izmenom sadržaja sekcije 'key', možemo da ubacimo neki skript
 
@@ -195,7 +195,7 @@ Pretpostavimo da imamo jednostavan sajt, čija je uloga da ima jedno polje za un
 <script>alert("123")</script>
 \end{lstlisting}
 
-(isti efekat možemo postići i sa unošenjem takvog koda unutar searchbox-a i izvršiti pretragu)
+(isti efekat možemo postići i sa unošenjem takvog koda unutar polja za unos i izvršiti pretragu)
 \item Unošenjem takvog URL-a u naš pretraživač (ili kliknom na dugme 'pretraga') ispisivaće se poruka \say{123}\\
 
 \end{enumerate}
@@ -286,7 +286,7 @@ Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se 
 
 \subsubsection{Umetanje SQL upita - prevencija}
 
-Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
+Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
 Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
@@ -303,7 +303,7 @@ Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja 
 Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, URL u našem pretraživaču izgledaće ovako:
 
 \texttt{http://banka.com/nalog?id=123}\\
-Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id admina sa svim pravima pristupa).
+Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id administratora sa svim pravima pristupa).
 \end{primer}
 
 Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje naredni primer.
@@ -313,7 +313,7 @@ Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koj
 Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, URL će izgledati ovako:
 
 \texttt{http://banka.com/nalog?id=123\&{}action=izmeniProfil}\\
-Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev adminu da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. \say{action=obrisiProfil}) i da im na taj način neovlašćeno pristupimo.\\
+Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev administratoru da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. \say{action=obrisiProfil}) i da im na taj način neovlašćeno pristupimo.\\
 \end{primer}
 U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe kontrole pristupa. Njihova primena se može kombinovati za složenije napade.
 
