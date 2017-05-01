@@ -170,7 +170,7 @@ U okrviru ovog rada, razmatraćemo tri najinteresantnije vrste napada iz ugla zl
 	\item Kontrola pristupa (eng.~{\em Access control})
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
-\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS} \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer svaki sajt zahteva od korisničkog pretraživača podršku Javascript-a.\\
+\textbf{Umetanje skriptova}, poznatiji kao \textbf{XSS} \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer većina sajtova zahteva od korisničkog pretraživača podršku Javascript-a.\\
 \textbf{Problem:} Korisnik je u situaciji da pošalje neki vid odgovora stranici (searchbox), a ako taj odgovor sadrži neke HTML tagove ili Javascript kod, stranica ih renderuje i izvršava kod.\\
 \textbf{Posledice:}
 \begin{enumerate}
@@ -210,7 +210,7 @@ Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosn
 
 \subsubsection{XSS - prevencija}
 
-Fokus u sprečavanju XSS \cite{XSS_prev} napada se oslanja na problem toga što pretraživač renderuje HTML tagove i izvršava Javascript kod.  
+Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač renderuje HTML tagove i izvršava Javascript kod.  
 
 Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}.
 
@@ -244,7 +244,7 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 
 \subsection{Umetanje SQL upita}
 
-\textbf{Umetanje SQL upita}(eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanje kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+\textbf{Umetanje SQL upita}(eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
 \textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne rukuje sa njima na pravilan način.\\
 \textbf{Posledice:} 
 \begin{enumerate}
@@ -286,7 +286,7 @@ Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se 
 
 \subsubsection{Umetanje SQL upita - prevencija}
 
-Solucija koja se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
+Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava stringove koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
 Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
@@ -335,7 +335,7 @@ Ipak, u većini slučajeva  na napad je teško reagovati i pored svih vidova pre
 Neki od čestih tipova napada onemogućavanja usluge su: \cite{DoS}
 \begin{itemize}
 	\item Prekoračenje bafera - hakeri koriste propust u programu zbog kog podaci koji prekoračuju dužinu bafera budu upisani u drugi bafer, što može dovesti do pada sistema;
-	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čeka se zahtev legitimnih korisnika nikada ne obrađuje...
+	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čega se zahtev legitimnih korisnika nikada ne obrađuje...
 \end{itemize}
 
 \section{Bezbednost veb servera} \label{server}
