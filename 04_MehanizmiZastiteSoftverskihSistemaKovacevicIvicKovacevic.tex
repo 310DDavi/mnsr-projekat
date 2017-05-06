@@ -163,11 +163,12 @@ Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se 
 
 Pretraživač ne predstavlja ograničenje. Ne smemo se oslanjati na to da korisnik neće sam uneti parametre koje želi, već treba i na nivou aplikacije da ograničimo prava pristupa.
 
-U okrviru ovog rada, razmatraćemo tri najinteresantnije vrste napada iz ugla zloupotrebe propusta u dizajnu aplikacija:
+U okrviru ovog rada, razmatraćemo četiri najinteresantnije vrste napada iz ugla zloupotrebe propusta u dizajnu aplikacija:
 \begin{enumerate}
 	\item Umetanje skriptova (eng.~{\em Cross-Site Scripting})
-	\item Umetanje SQL upita (eng.~{\em Direct Object References})
+	\item Umetanje SQL upita (eng.~{\em SQL Injection})
 	\item Kontrola pristupa (eng.~{\em Access control})
+	\item Onemogućavanje usluge (eng.~{\em Denial of Service - DoS})
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
 Umetanje skriptova, poznatiji kao XSS \cite{XSS}, je napad umetanjem(eng.~{\em \\injection}) kodova u sajt. Takođe je jedan od najuobičajenijih načina napada, jer većina sajtova zahteva od korisničkog pretraživača podršku Javascript-a.\\
