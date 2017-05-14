@@ -39,7 +39,7 @@
 
 \section{Uvod}
 
-Propusti u bezbednosti softvera mogu biti vrlo problematični za informacione sisteme, pogotovu one u komercijalnoj primeni, koji rade sa velikom količinom poverljivih podataka, te je ovo tema koja je vrlo zastupljena u modernom računarstvu. Kako se količina podataka povećava velikom brzinom i sve je veći broj aplikacija koje rade na vebu, očekuje se da značaj ovog problema postaje sve bitniji.
+Propusti u bezbednosti softvera mogu biti vrlo problematični za informacione sisteme, pogotovu one u komercijalnoj primeni, koji rade sa velikom količinom poverljivih podataka, te je ovo tema koja je vrlo zastupljena u modernom računarstvu. Kako se količina podataka povećava velikom brzinom i sve je veći broj aplikacija koje rade na vebu, očekuje se da značaj ovog problema postane sve bitniji.
 
 U okviru ovog rada ćemo se susresti sa osnovnim pojmovima i konceptima ovog problema. U odeljku \ref{bezbednost}, koji se tiče bezbednosti softvera, upoznaćemo se sa nekim principima koji se koriste sa ciljem implementacije softvera sa minimalnim brojem bezbednosnih rizika \cite{BIS}. Nakon upoznavanja sa osnovama bezbednosti, u odeljku \ref{aplikacije}, imaćemo priliku da se upoznamo sa nekim od čestih tipova napada na veb aplikacije \cite{SQL, XSS, AC}, kao i načinima za njihovu prevenciju. Kroz primere \ref{primer2}, \ref{primer3} i \ref{primer4}, videćemo pojednostavljene verzije ovih napada na delu.
 
@@ -54,9 +54,8 @@ Najbolja praksa pri razvoju bezbednog softvera uključuje razmišljanje o sigurn
 U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako je ova oblast prilično široka, pomenućemo samo one najvažnije. Fokus će biti na veb aplikacijama. Bitno je napomenuti da neće biti reči o operativnim sistemima, antivirusnoj zaštiti i zaštitnom zidu, koji su bitni aspekti bezbednosti sistema, ali nisu direktno vezani za dizajn softvera.
 
 \subsection{Kontrola pristupa podacima}
-Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do neautorizovanog pristupa, upotrebe, menjanja, uništavanja kao i sprečavanja raspoloživosti.
 
-Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).\cite{BIS}
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).\cite{BIS}
 
 Kontrola pristupa se ostvaruje u tri koraka:
 \begin{itemize}
@@ -75,15 +74,15 @@ Na slici \ref{slika1} možemo videti redosled primene koraka kontrole pristupa p
 \end{figure}
 
 \subsubsection{Identifikacija}
+
 Identifikacija je pretpostavljanje identiteta subjekta. Uobičajeno se odvija na osnovu korisničkog imena, broja računa, ID kartice. Uglavnom nije jedinstvena i sama za sebe predstavlja veoma slab koncept.
 
 \subsubsection{Autentikacija}
-Autentikacija je skup metoda za ustanovljavanje istinitosti saopštenog identiteta. Faktori autentikacije su elementi koji učestvuju u proveri (što je više faktora to je tehnika pouzdanija).
 
-Tehnike autentikacije: 
+Autentikacija je skup metoda za ustanovljavanje istinitosti saopštenog identiteta. Faktori autentikacije su elementi koji učestvuju u proveri (što je više faktora to je tehnika pouzdanija). Tehnike autentikacije su: 
     \begin{itemize}
         \item Memorijski faktori (lozinka, PIN)
-        \item  Biometrijski faktori (visina, težina, otisak prsta, rukopis)
+        \item Biometrijski faktori (visina, težina, otisak prsta, rukopis)
         \item Fizički faktori (ID kartica, token)
         \item Logički (neka pravila reagovanja na različite uslove)                                    
         \item Geografski (Lokacija korisnika)                                
@@ -108,6 +107,7 @@ i onda odlazi, pritom zaboravljajući da se odjavi. Ispravno dizajniran sistem z
 će automatski odjaviti korisnika, nakon nekog perioda neaktivnosti.
 
 \subsubsection{Autorizacija}
+
 Autorizacija predstavlja mehanizam provere prava specifičnog subjekta.
 Samo znanje korisnikovog identiteta može biti nedovoljno za izvršavanje određene operacije, već je neophodno znati koje su njegove privilegije.
 Na primer, kada ATM (eng.~{\em Automated Teller Machine}\footnote{Bankomat}) mašina autentikuje korisnika putem fizičkog faktora (bankovna kartica) i memorijskog faktora (PIN kod),
@@ -123,14 +123,13 @@ Neke politike zahtevaju dvoje ljudi da bi se autorizovala kritična transakcija.
 bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke nije dovoljna za ovu svrhu.
 
 \subsection{Kriptovanje podataka}
+
 Kriptografija\cite{CRYP} je grana matematike koja se zasniva na zaštiti podataka kroz njihovu transformaciju. Predstavlja veoma bitan alat koji se koristi u mnogim bezbednosnim aspektima. Na primer, primena kriptografije može doprineti obezbeđivanju integriteta i poverljivosti podataka i implementaciji naprednih metoda autentikacije korisnika.
 
-Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu kljča i agoritma se  vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
-
-Ovu oblast nećemo detaljnije obrađivati u okiru ovog rada.
-
+Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu ključa i agoritma se  vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
 
 \subsection{Eksplicitna provera podataka}
+
 Softverski sistemi i komponente obično prave pretpostavke o podacima nad kojima rade. Veoma je bitno da se eksplicitno obezbedi da te pretpostavke ustvari važe. Ranjivosti sistema su često prouzrokovane iz implicitnih pretpostavki o podacima, koje mogu biti razotkrivene ako napadač zavara ove pretpostavke.
 Kao takav, bitno je da dizajn softverskog sistema obezbedi da se validacija podataka zaista izvrši i da su sve 
 pretpostavke o podacima potvrđene.\cite{Top10Flaws}
@@ -163,7 +162,7 @@ Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se 
 
 Pretraživač ne predstavlja ograničenje. Ne smemo se oslanjati na to da korisnik neće sam uneti parametre koje želi, već treba i na nivou aplikacije da ograničimo prava pristupa.
 
-U okrviru ovog rada, razmatraćemo četiri najinteresantnije vrste napada iz ugla zloupotrebe propusta u dizajnu aplikacija:
+Vremenom su se razvile brojne vrste napada koje se koriste propustima u različitim fazama razvoja softvera. U okrviru ovog rada, razmatraćemo četiri najinteresantnije vrste napada iz ugla zloupotrebe propusta u dizajnu aplikacija:
 \begin{enumerate}
 	\item Umetanje skriptova (eng.~{\em Cross-Site Scripting})
 	\item Umetanje SQL upita (eng.~{\em SQL Injection})
@@ -211,12 +210,7 @@ Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosn
 
 \subsubsection{XSS - prevencija}
 
-Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač renderuje HTML tagove i izvršava Javascript kod.  
-
-Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}.
-
-Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
-
+Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač renderuje HTML tagove i izvršava Javascript kod. Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}. Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
 
 \begin{table}[ht]
 
@@ -245,7 +239,7 @@ Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem 
 
 \subsection{Umetanje SQL upita}
 
-Umetanje SQL upita (eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt, ali ovaj put, glavna meta je baza podataka koju koristi server.\\
+Umetanje SQL upita (eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt. Ovaj put, glavna meta je baza podataka koju koristi server.\\
 \textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne rukuje sa njima na pravilan način.\\
 \textbf{Posledice:} 
 \begin{enumerate}
@@ -281,14 +275,13 @@ WHERE username='hi' OR '1'='1'
 	AND password='hi' OR '1'='1'
 \end{lstlisting}
 
-Primetimo da je izraz \say{1=1} uvek tačan pa je deo za korisničko ime i lozinku krajnje irelevantan.\\
-Sistem će prijaviti korisnika (najčesće) sa kredencijalima korisnika koji se nalazi na prvom mestu spiska korisnika iz baze.\\
+Primetimo da je izraz \say{1=1} uvek tačan pa je deo za korisničko ime i lozinku krajnje irelevantan.
+Sistem će prijaviti korisnika (najčešće) sa kredencijalima korisnika koji se nalazi na prvom mestu spiska korisnika iz baze.\\
 \end{primer}
 
 \subsubsection{Umetanje SQL upita - prevencija}
 
-Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit}\\
-Takođe postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
+Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit} Takođe, postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
@@ -298,7 +291,7 @@ Kontrola pristupa \cite{AC} predstavlja filtriranje onoga šta korisnik može da
 
 \subsubsection{Kontrola pristupa - primena}
 
-Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara URL-a.
+Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja osnovni način zloupotrebe prava pristupa i svodi se na direktno menjanje parametara URL-a. U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe kontrole pristupa. Njihova primena se može kombinovati za složenije napade.
 \begin{primer}
 \label{primer3}
 Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, URL u našem pretraživaču izgledaće ovako:
@@ -306,7 +299,6 @@ Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu
 \texttt{http://banka.com/nalog?id=123}\\
 Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id administratora sa svim pravima pristupa).
 \end{primer}
-
 Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje naredni primer.
 
 \begin{primer}
@@ -316,13 +308,10 @@ Pretpostavimo da imamo još i dugme za izmenu profila. Klikom na njega, URL će 
 \texttt{http://banka.com/nalog?id=123\&{}action=izmeniProfil}\\
 Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nemamo vidljivo dugme za tu funkcionalnost, već moramo da šaljemo zahtev administratoru da to uradi), možemo da pretpostavimo (nagađamo) da i ostale akcije imaju slične nazive (npr. \say{action=obrisiProfil}) i da im na taj način neovlašćeno pristupimo.\\
 \end{primer}
-U primerima \ref{primer3} i \ref{primer4} možemo videti dva načina zloupotrebe kontrole pristupa. Njihova primena se može kombinovati za složenije napade.
 
 \subsubsection{Kontrola pristupa - prevencija}
 
-Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obsc-urity} \cite{AS})). 
-
-Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
+Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obsc-urity} \cite{AS})). Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
 
 \subsection{Onemogućavanje usluge}
 Onemogućavanje usluge (eng.~{\em Denial of Service - DoS)} \cite{DoSM} predstavlja pokušaj da se neki resurs učini neraspoloživim. Cilj ovog napada nije da omogući pristup ili kontrolu nad udaljenim sistemom već da zauzimanjem svih komunikacionih kapaciteta onemoguće pristup sistemu od strane regularnih korisnika.
@@ -353,7 +342,6 @@ Stavke koji su bitne za zaštitu veb servera su:
 	\item Odvajanje aplikacija i skriptova
 	\item Razdvajanje razvojnog i test okruženja...
 \end{itemize}
-
 Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb servera i preporučljivo je pridržavati ih se prilikom njegovog održavanja.\\
 
 \textbf{Uklanjanje nepotrebnih servisa} je poželjno jer svaki servis koji se koristi na veb serveru otvara novi priključak (eng.~{\em port}) na njemu. Na taj način se povećava broj slabih tačaka servera, te ga je teže održavati. Takođe, uklanjanjem nepotrebnih servisa možemo dobiti povećanje performansi kod korišćenih servisa.
