@@ -41,7 +41,7 @@
 
 Propusti u bezbednosti softvera mogu biti vrlo problematični za informacione sisteme, pogotovu one u komercijalnoj primeni, koji rade sa velikom količinom poverljivih podataka, te je ovo tema koja je vrlo zastupljena u modernom računarstvu. Kako se količina podataka povećava velikom brzinom i sve je veći broj aplikacija koje rade na vebu, očekuje se da značaj ovog problema postane sve bitniji.
 
-U okviru ovog rada ćemo se susresti sa osnovnim pojmovima i konceptima ovog problema. U odeljku \ref{bezbednost}, koji se tiče bezbednosti softvera, upoznaćemo se sa nekim principima koji se koriste sa ciljem implementacije softvera sa minimalnim brojem bezbednosnih rizika \cite{BIS}. Nakon upoznavanja sa osnovama bezbednosti, u odeljku \ref{aplikacije}, imaćemo priliku da se upoznamo sa nekim od čestih tipova napada na veb aplikacije \cite{SQL, XSS, AC}, kao i načinima za njihovu prevenciju. Kroz primere \ref{primer2}, \ref{primer3} i \ref{primer4}, videćemo pojednostavljene verzije ovih napada na delu.
+U okviru ovog rada ćemo se susresti sa osnovnim pojmovima i konceptima ovog problema. U odeljku \ref{bezbednost}, koji se tiče bezbednosti softvera \cite{BIS}, upoznaćemo se sa nekim principima koji se koriste sa ciljem implementacije softvera sa minimalnim brojem bezbednosnih rizika. Nakon upoznavanja sa osnovama bezbednosti, u odeljku \ref{aplikacije}, imaćemo priliku da se upoznamo sa nekim od čestih tipova napada na veb aplikacije \cite{SQL, XSS, AC}, kao i načinima za njihovu prevenciju. Kroz primere \ref{primer2}, \ref{primer3} i \ref{primer4}, videćemo pojednostavljene verzije ovih napada na delu.
 
 Prelaskom na odeljak \ref{server}, sa problema bezbednosti aplikacija preći ćemo i na problem bezbednosti okruženja na kom se aplikacija izvršava. Dotaći ćemo se i smernica za pravilno održavanja servera \cite{WS}. U zaklju\v{c}ku \ref{zakljucak} je dat kratak pregled najbitnijih stavki koje su obrađene u ovom radu, kao i dodatne smernice za dalji nastavak istraživačkog rada. Osim toga, ukratko je opisan i problem koji nastaje ukoliko prevencija zakaže.
 
@@ -55,7 +55,7 @@ U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako
 
 \subsection{Kontrola pristupa podacima}
 
-Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).\cite{BIS}
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).
 
 Kontrola pristupa se ostvaruje u tri koraka:
 \begin{itemize}
@@ -124,7 +124,7 @@ bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke n
 
 \subsection{Kriptovanje podataka}
 
-Kriptografija\cite{CRYP} je grana matematike koja se zasniva na zaštiti podataka kroz njihovu transformaciju. Predstavlja veoma bitan alat koji se koristi u mnogim bezbednosnim aspektima. Na primer, primena kriptografije može doprineti obezbeđivanju integriteta i poverljivosti podataka i implementaciji naprednih metoda autentikacije korisnika.
+Kriptografija \cite{CRYP} je grana matematike koja se zasniva na zaštiti podataka kroz njihovu transformaciju. Predstavlja veoma bitan alat koji se koristi u mnogim bezbednosnim aspektima. Na primer, primena kriptografije može doprineti obezbeđivanju integriteta i poverljivosti podataka i implementaciji naprednih metoda autentikacije korisnika.
 
 Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu ključa i agoritma se  vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
 
@@ -149,12 +149,11 @@ Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosni
 
 \section{Bezbednost veb aplikacija} \label{aplikacije}
 
-Sa pojavom Veb 2.0, povećanjem deljenja informacija preko socijalnih mreža i korišćenjem veba kao sredstva poslovanja i pružanja različitih informacija, bezbednost sajtova često biva ugrožena upadima od strane zlonamernih korisnika.
+Sa pojavom Veb 2.0 \cite{VEB} povećala se potreba za zaštitom veb aplikacija, pošto su one postale osnova za izvršavanje osetljivih operacija  (i prikupljanja istih takvih informacija) krajnjih korisnika (transakcija novca, rezervisanje smeštaja...). Sajtovi koji sadrže takve aplikacije, često bivaju meta napada od strane zlonamernih korisnika.
 
-Zlonamerni korisnici (u daljem tekstu hakeri\footnote{Pojam haker sugeriše na stručnjaka iz oblasti računarskih nauka koji ima kapacitete da rešava probleme sa kojima se suočava. Vremenom, reč haker postala je sinonim za ljude koji koriste nedostatke u programu kako bi upali u računarski sistem.}) ili nastoje da kompromituju korporativnu mrežu ili navode krajnje korisnike koji joj pristupaju ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi, odnosno virusi). Kao rezultat toga, industrija obraća veliku pažnju na bezbednost samih veb aplikacija, pored bezbednosti osnovne računarske mreže i operativnih sistema.
+Zlonamerni korisnici (u daljem tekstu hakeri\footnote{Pojam haker sugeriše na stručnjaka iz oblasti računarskih nauka koji ima kapacitete da rešava probleme sa kojima se suočava. Vremenom, reč haker postala je sinonim za ljude koji koriste nedostatke u programu kako bi upali u računarski sistem.}) iskorišćavaju propuste napravljene u dizajniranju sajtova, pristupaju informacijama za koja nemaju privilegije, menjaju ih, brišu ili jednostavno navode krajnjeg korisnika ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi). Reultat toga je da se velika pažnja obraća na bezbednost veb aplikacija, pored osnovnih nivoa bezbednosti (računarska mreža ili operativni sistem).
 
-Bezbednost veba je grana bezbednosti informacija koja se bavi bezbednošću veb sajtova, veb aplikacija i veb servera. Bezbednost veb aplikacija se oslanja na principe bezbednosti aplikacija uopšte, ali ih primenjuje specifično za Internet i veb sisteme.
-Bezbednost veb servera je zaštita informacija dostupnih preko veb servera. Te informacije se mogu ugroziti povećanim sigurnosnim rizicima i propustima prilikom implementacije.
+Bezbednost veb aplikacija je suštinski ista kao i bezbednost aplikacija uopšte, ali postoje specifični delovi te bezbednosti, s obzirom na okruženje u kom se ona nalazi (Internet). Takvo okruženje donosi veliki broj sigurnosnih rizika na koje se mora obratiti pažnja tokom dizajniranja aplikacija.
 
 \subsection{Sigurnosni rizici}
 
@@ -281,7 +280,7 @@ Sistem će prijaviti korisnika (najčešće) sa kredencijalima korisnika koji se
 
 \subsubsection{Umetanje SQL upita - prevencija}
 
-Rešenje koje se nameće za umetanje SQL upita, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{SQL_prev}, te treba navesti sistem da ih ignoriše.\cite{Sanit} Takođe, postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
+Rešenje koje se nameće za umetanje SQL upita \cite{SQL_prev}, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{Sanit} , te treba navesti sistem da ih ignoriše. Takođe, postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
@@ -322,7 +321,7 @@ Prevencija ovog tipa napada se može implementirati na nivou mreže. Na primer, 
 
 Ipak, u većini slučajeva  na napad je teško reagovati i pored svih vidova prevencije. Često je neophodno isključivanje servera sa mreže i ponovno pokretanje usluga na njemu.
 
-Neki od čestih tipova napada onemogućavanja usluge su: \cite{DoS}
+Neki od čestih tipova napada onemogućavanja usluge \cite{DoS} su: 
 \begin{itemize}
 	\item Prekoračenje bafera - hakeri koriste propust u programu zbog kog podaci koji prekoračuju dužinu bafera budu upisani u drugi bafer, što može dovesti do pada sistema;
 	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čega se zahtev legitimnih korisnika nikada ne obrađuje...
