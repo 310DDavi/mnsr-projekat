@@ -57,7 +57,7 @@ U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako
 
 Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).
 
-Kontrola pristupa se ostvaruje u tri koraka \cite{Top10}:
+Kontrola pristupa se ostvaruje u tri koraka \cite{Top10, SEC}:
 \begin{itemize}
 	\item Identifikacija
 	\item Autentikacija
@@ -324,6 +324,20 @@ Neki od čestih tipova napada onemogućavanja usluge \cite{DoS} su:
 	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čega se zahtev legitimnih korisnika nikada ne obrađuje...
 \end{itemize}
 
+\subsection{Reakcija na napad}
+
+Reakcija na napad \cite{RESP} je tema kojom se uglavnom retko bavimo, sve do momenta kada nam je to neophodno. Problem je što je tada prekasno za razmišljanje. Da bi se na pravi način odgovorilo na ugrožavanje bezbednosti neophodno je pratiti naredne korake:
+
+\begin{itemize}
+	\item Identifikacija - detaljno pregledati izveštaje, analizirati prikupljene informacije i, ukoliko je neophodno, označiti događaj kao incident
+	\item Izolovanje - potrebno je suzbiti opasnost i sprečiti je da se dalje širi kroz sistem i mrežu (ukloniti radnu stanicu sa mreže ili je isključiti)
+	\item Iskorenjivanje - ukloniti sve tragove javljanja incidenta (formatiranje stalne memorije)
+	\item Oporavljanje - često podrazumeva ponovno pokretanje radne stanice i vraćanje na rezervnu kopiju koja sigurno ima ispravno ponašanje
+	\item Nadograđivanje - na osnovu informacija prikupljenih za vreme i posle napada, može se doći do informacija koje mogu pomoći u daljem unapređivanju bezbednosti sistema
+\end{itemize}
+
+Nakon incidenta, potrebno je da se napravi izveštaj koji će sadržati informacije o tome kako se incident dogodio, koje su mere preduzete kao odgovor, ali i šta je preduzeto kako bi se sprečilo ponovno pojavljivanje sličnih incidenata. Bezbednost mnogo zavisi od toga kako učimo na svojim greškama.
+
 \section{Bezbednost veb servera} \label{server}
 
 U savremeno doba brojni hakerski napadi nam jasno stavljaju do znanja koliko su serveri \say{ranjivi}, kao i koliko je bitna njihova zaštita. Zaštita same veb aplikacije nam neće biti previše korisna ukoliko nam je server nebezbedan.
@@ -363,14 +377,11 @@ Predstavili smo različite principe i preporuke za pisanje bezbednog softvera i 
 	\item posebnu pažnju obratiti na podatke dobijene od korisnika,
 	\item ništa ne pretpostavljati i sve potvrditi,
 	\item mora se obezbediti da mogućnosti korisnika budu jasno i striktno definisane,
+	\item neophodno je unapređivati bezbednost sistema nakon incidenata
 	\item ukoliko okruženje u kom se aplikacija izvršava nije bezbedno - nije bezbedna ni aplikacija.
 \end{itemize}
 
 Bitno je napomenuti da nijedan softver nikada nije potpuno bezbedan, te se mora unapređivati. Takođe, sve navedeno u prethodnim poglavljima ne garantuje bezbednost, ali u velikoj meri smanjuje rizik od pojavljivanja propusta i predstavlja dobru praksu prilikom izrade softvera.
-
-Treba imati u vidu i da u slučaju da prevencije ne daju željene rezultate i da napad bude uspešan, uglavnom su mogućnosti administratora dosta male. U tim slučajevima je prvi zadatak uočiti napad, što nije uvek tako jednostavno, pogotovu ukoliko je meta napada poverljivost informacija. Tada, glavnu ulogu ima provera sistemskih i aplikativnih izveštaja.
-
-Nakon detekcije napada, ponekad je potrebno server/radnu stanicu isključiti sa mreže i izvršiti temeljan pregled sistema, ukloniti posledice napada, ali i propust koji ga je omogućio. Tek nakon što smo uvereni da je okruženje spremno za upotrebu, ponovo vršimo povezivanje na mrežu.
 
 Dalje istraživanje može se usmeriti ka detaljnijoj analizi drugih aspekata narušavanja bezbednosti i njihove prevencije koji nisu navedeni u ovom radu zarad korigovanja kompleksnosti. Takođe, pažnja se može više posvetiti samim posledicama napada, odnosno akcijama potrebnim za oporavak i vraćanje sistema u prvobitno stanje.
 
