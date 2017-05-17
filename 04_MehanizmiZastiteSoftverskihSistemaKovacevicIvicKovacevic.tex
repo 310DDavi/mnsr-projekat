@@ -57,7 +57,7 @@ U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako
 
 Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).
 
-Kontrola pristupa se ostvaruje u tri koraka:
+Kontrola pristupa se ostvaruje u tri koraka \cite{Top10}:
 \begin{itemize}
 	\item Identifikacija
 	\item Autentikacija
@@ -75,17 +75,17 @@ Na slici \ref{slika1} možemo videti redosled primene koraka kontrole pristupa p
 
 \subsubsection{Identifikacija}
 
-Identifikacija je pretpostavljanje identiteta subjekta. Uobičajeno se odvija na osnovu korisničkog imena, broja računa, ID kartice. Uglavnom nije jedinstvena i sama za sebe predstavlja veoma slab koncept.
+Identifikacija predstavlja tvrdnju identitata subjekta. Može se odvijati na osnovu korisničnog imena, ID kartice, itd. Obično se koristi  kao prvi stepen provere identiteta i često nije jedinstvena.
 
 \subsubsection{Autentikacija}
 
-Autentikacija je skup metoda za ustanovljavanje istinitosti saopštenog identiteta. Faktori autentikacije su elementi koji učestvuju u proveri (što je više faktora to je tehnika pouzdanija). Tehnike autentikacije su: 
+Autentikacija predstavlja mehanizam verifikacije saopštenog identiteta. Može se odvijati na osnovu različitih elemenata, i što ih je više uključeno, mehanizam je pouzdaniji. Elementi se mogu grupisati na sledeći način: 
     \begin{itemize}
-        \item Memorijski faktori (lozinka, PIN)
-        \item Biometrijski faktori (visina, težina, otisak prsta, rukopis)
-        \item Fizički faktori (ID kartica, token)
+        \item Memorijski (lozinka, PIN...)
+        \item Biometrijski (visina, tezina, otisak prsta, rukopis, DNK...)
+        \item Fizički (ID kartica, token...)
         \item Logički (neka pravila reagovanja na različite uslove)                                    
-        \item Geografski (Lokacija korisnika)                                
+        \item Geografski (lokacija korisnika)                                
     \end{itemize}
 
 Daleko najpopularniji mehanizam za autentikaciju ostaje lozinka. Korišćenje lozinke zahteva da sistem ili servis 
@@ -97,19 +97,16 @@ dodeljen kredencijal autentikacije ili token, tako da korisnik
 ne mora da se ponovo autentikuje svaki put kada hoće da izvrši novi zahtev ili transakciju na sistemu. 
 Istovremeno, ako je napadač u mogućnosti da falsifikuje ove kredencijale ili token, on može lako zaobići 
 mehanizam autentikacije. Jedan od načina zaštite protiv falsifikovanja kredencijala je korišćenje 
-kriptografskih algoritama pri pravljenju kredencijala ili tokena.\cite{Top10}
+kriptografskih algoritama pri pravljenju kredencijala ili tokena.
 
 Sistem za autentikaciju treba da bude dizajniran tako da automatski zahteva ponovnu autentikaciju nakon nekog 
 perioda neaktivnosti ili pre neke kritične operacije.
 Ako sistem za autentikaciju ne ograniči vremenski period za koji će korisnik biti autentikovan onda može 
-da dopusti pristup korisnicima kojima ne bi trebalo. Zamislimo korisnika koji se prijavljuje na javni terminal
-i onda odlazi, pritom zaboravljajući da se odjavi. Ispravno dizajniran sistem za autentikaciju 
-će automatski odjaviti korisnika, nakon nekog perioda neaktivnosti.
+da dopusti pristup korisnicima kojima ne bi trebalo.
 
 \subsubsection{Autorizacija}
 
-Autorizacija predstavlja mehanizam provere prava specifičnog subjekta.
-Samo znanje korisnikovog identiteta može biti nedovoljno za izvršavanje određene operacije, već je neophodno znati koje su njegove privilegije.
+Autorizacija predstavlja proces provere privilegija entiteta. Uglavnom nemaju svi korisnici iste privilegije, tako da je pre izvršavanja neke operacije potrebno proveriti da li je korisniku dozvoljeno da je izvrši. 
 Na primer, kada ATM (eng.~{\em Automated Teller Machine}\footnote{Bankomat}) mašina autentikuje korisnika putem fizičkog faktora (bankovna kartica) i memorijskog faktora (PIN kod),
 to ne znači da je tom korisniku dozvoljeno da podigne proizvoljnu sumu novca sa svog računa. Većina korisnika je autorizovana 
 da podigne sumu novca do neke određene dnevne granice, ili da izvršava neke određene operacije (upit stanja), 
@@ -132,9 +129,9 @@ Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U moder
 
 Softverski sistemi i komponente obično prave pretpostavke o podacima nad kojima rade. Veoma je bitno da se eksplicitno obezbedi da te pretpostavke ustvari važe. Ranjivosti sistema su često prouzrokovane iz implicitnih pretpostavki o podacima, koje mogu biti razotkrivene ako napadač zavara ove pretpostavke.
 Kao takav, bitno je da dizajn softverskog sistema obezbedi da se validacija podataka zaista izvrši i da su sve 
-pretpostavke o podacima potvrđene.\cite{Top10Flaws}
+pretpostavke o podacima potvrđene.
 
-Kako bi se obezbedila kvalitetna validacija podataka, neophodno je koristiti kombinacije sledećih pristupa:
+Kako bi se obezbedila kvalitetna validacija podataka, neophodno je koristiti kombinacije sledećih pristupa \cite{Top10Flaws}:
 \begin{itemize}
 	\item \textit{Centralizovani mehanizam za validaciju} - svi podaci koji ulaze u sistem moraju da prođu kroz osnovne korake validacije pre nego što sistem počne da ih upotrebljava
 	\item \textit{Validacija često ponovljenih podataka} - poželjno je koristiti već postojeće biblioteke za provere ispravnosti čestih formata podataka kao što su adrese elektronske pošte
