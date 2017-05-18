@@ -75,7 +75,7 @@ Na slici \ref{slika1} možemo videti redosled primene koraka kontrole pristupa p
 
 \subsubsection{Identifikacija}
 
-Identifikacija predstavlja tvrdnju identitata subjekta. Može se odvijati na osnovu korisničnog imena, ID kartice, itd. Obično se koristi  kao prvi stepen provere identiteta i često nije jedinstvena.
+Identifikacija predstavlja tvrdnju identiteta subjekta. Može se odvijati na osnovu korisničnog imena, ID kartice, itd. Obično se koristi  kao prvi stepen provere identiteta i često nije jedinstvena.
 
 \subsubsection{Autentikacija}
 
@@ -84,8 +84,8 @@ Autentikacija predstavlja mehanizam verifikacije saopštenog identiteta. Može s
         \item Memorijski (lozinka, PIN...)
         \item Biometrijski (visina, tezina, otisak prsta, rukopis, DNK...)
         \item Fizički (ID kartica, token...)
-        \item Logički (neka pravila reagovanja na različite uslove)                                    
-        \item Geografski (lokacija korisnika)                                
+        \item Logički (neka pravila reagovanja na različite uslove)
+        \item Geografski (lokacija korisnika)
     \end{itemize}
 
 Daleko najpopularniji mehanizam za autentikaciju ostaje lozinka. Korišćenje lozinke zahteva da sistem ili servis 
@@ -123,7 +123,7 @@ bitno je da se uveri da su dve osobe različite pa autentikacija putem lozinke n
 
 Kriptografija \cite{CRYP} je grana matematike koja se zasniva na zaštiti podataka kroz njihovu transformaciju. Predstavlja veoma bitan alat koji se koristi u mnogim bezbednosnim aspektima. Na primer, primena kriptografije može doprineti obezbeđivanju integriteta i poverljivosti podataka i implementaciji naprednih metoda autentikacije korisnika.
 
-Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu ključa i agoritma se  vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
+Kriptografija se sastoji iz dve osnovne komponente, algoritma i ključa. U modernim kriptografskim sistemima algoritmi predstavljaju kompleksne matematičke formule, dok su ključevi nizovi bita. Na osnovu ključa i agoritma se vrši odgovarajuća transformacija nad podacima. Da bi dve strane komunicirale, moraju koristiti isti algoritam (ili algoritme koji su dizajnirani da rade zajedno) i uglavnom isti ključ.
 
 \subsection{Eksplicitna provera podataka}
 
@@ -146,15 +146,15 @@ Ukoliko se ne pridržavamo ovih principa može doći do pojave mnogih sigurnosni
 
 \section{Bezbednost veb aplikacija} \label{aplikacije}
 
-Sa pojavom Veb 2.0 \cite{VEB} povećala se potreba za zaštitom veb aplikacija, pošto su one postale osnova za izvršavanje osetljivih operacija  (i prikupljanja istih takvih informacija) krajnjih korisnika (transakcija novca, rezervisanje smeštaja...). Sajtovi koji sadrže takve aplikacije, često bivaju meta napada od strane zlonamernih korisnika.
+Sa pojavom Veb 2.0 \cite{VEB} povećala se potreba za zaštitom veb aplikacija, pošto su one postale osnova za izvršavanje osetljivih operacija (i prikupljanja istih takvih informacija) krajnjih korisnika (transakcija novca, rezervisanje smeštaja...). Sajtovi koji sadrže takve aplikacije, često bivaju meta napada od strane zlonamernih korisnika.
 
-Zlonamerni korisnici (u daljem tekstu hakeri\footnote{Pojam haker sugeriše na stručnjaka iz oblasti računarskih nauka koji ima kapacitete da rešava probleme sa kojima se suočava. Vremenom, reč haker postala je sinonim za ljude koji koriste nedostatke u programu kako bi upali u računarski sistem.}) iskorišćavaju propuste napravljene u dizajniranju sajtova, pristupaju informacijama za koja nemaju privilegije, menjaju ih, brišu ili jednostavno navode krajnjeg korisnika ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi). Reultat toga je da se velika pažnja obraća na bezbednost veb aplikacija, pored osnovnih nivoa bezbednosti (računarska mreža ili operativni sistem).
+Zlonamerni korisnici (u daljem tekstu hakeri\footnote{Pojam haker sugeriše na stručnjaka iz oblasti računarskih nauka koji ima kapacitete da rešava probleme sa kojima se suočava. Vremenom, reč haker postala je sinonim za ljude koji koriste nedostatke u programu kako bi upali u računarski sistem.}) iskorišćavaju propuste napravljene u dizajniranju sajtova, pristupaju informacijama za koje nemaju privilegije, menjaju ih, brišu ili jednostavno navode krajnjeg korisnika ka preuzimanju sadržaja čijeg rizika nisu svesni (zlonamerni programi). Reultat toga je da se velika pažnja obraća na bezbednost veb aplikacija, pored osnovnih nivoa bezbednosti (računarska mreža ili operativni sistem).
 
 Bezbednost veb aplikacija je suštinski ista kao i bezbednost aplikacija uopšte, ali postoje specifični delovi te bezbednosti, s obzirom na okruženje u kom se ona nalazi (Internet). Takvo okruženje donosi veliki broj sigurnosnih rizika na koje se mora obratiti pažnja tokom dizajniranja aplikacija.
 
 \subsection{Sigurnosni rizici}
 
-Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se razmišlja o zaštiti veb aplikacije, ne sme se voditi mišlju: sve što je prikazano, biva naše ograničenje onoga što možemo da učinimo. Sve što predstavlja klijentsku stranu i ograničenja koja su pomoću nje nametnuta, mogu se veoma lako zaobići.
+Najveći sigurnosni rizici potiču iz nerazumevanja sposobnosti hakera. Kada se razmišlja o zaštiti veb aplikacije, ne sme se voditi mišlju: sve što je prikazano biva naše ograničenje onoga što možemo da učinimo. Sve što predstavlja klijentsku stranu i ograničenja koja su pomoću nje nametnuta mogu se veoma lako zaobići.
 
 Pretraživač ne predstavlja ograničenje. Ne smemo se oslanjati na to da korisnik neće sam uneti parametre koje želi, već treba i na nivou aplikacije da ograničimo prava pristupa.
 
@@ -277,12 +277,12 @@ Sistem će prijaviti korisnika (najčešće) sa kredencijalima korisnika koji se
 
 \subsubsection{Umetanje SQL upita - prevencija}
 
-Rešenje koje se nameće za umetanje SQL upita \cite{SQL_prev}, jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{Sanit} , te treba navesti sistem da ih ignoriše. Takođe, postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
+Rešenje koje se nameće za umetanje SQL upita \cite{SQL_prev} jeste da sistem pravilno proverava niske karaktera koji su uneti kao korisničko ime ili lozinka (konkretno u našem primeru). Glavni problem i jeste u korišćenju specijalnih karaktera (kao što su = ili ' itd.) \cite{Sanit} , te treba navesti sistem da ih ignoriše. Takođe, postoje i softveri namenjeni proveri \say{ranjivosti} veb aplikacije od napada umetanjem, uz predloge dodatne zaštite.
 
 \subsection{Kontrola pristupa}
 
-Kontrola pristupa \cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi,  u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
-\textbf{Problem:} Razvijaoci pretpostavljaju da, ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
+Kontrola pristupa \cite{AC} predstavlja filtriranje onoga šta korisnik može da vidi ili sa kojim podacima može da radi, u zavisnosti od toga koja prava poseduje. Cilj hakera je pristupanje, menjanje nečega za šta ne poseduju prava.\\
+\textbf{Problem:} Razvijaoci pretpostavljaju da ako nešto nije vidljivo korisniku, on ne može da mu pristupi.\\
 \textbf{Posledica:} Neovlašćen pristup podacima ili funkcionalnostima.
 
 \subsubsection{Kontrola pristupa - primena}
@@ -293,7 +293,7 @@ Direktno referisanje objekata (eng.~{\em Direct Object References}) predstavlja 
 Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu. Nakon uspešnog prijavljivanja, URL u našem pretraživaču izgledaće ovako:
 
 \texttt{http://banka.com/nalog?id=123}\\
-Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id administratora sa svim pravima pristupa).
+gde je \say{123} naša identifikacija na sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id administratora sa svim pravima pristupa).
 \end{primer}
 Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje primer \ref{primer4}.
 
@@ -310,17 +310,17 @@ Pretpostavimo da ne možemo mi direktno da izbrišemo nalog sa sajta banke (nema
 Ključna stvar jeste da se provere pristupa (autorizacija) rade na serveru (izbegavati \say{Bezbednost prema vidljivosti}(eng.~{\em Security through obsc-urity} \cite{AS})). Naivni pristup bi bio i da se ta provera dešava pri svakoj akciji koju korisnik želi da izvrši (potvrda korisničkog imena i lozinke za tu akciju i na osnovu toga provera da li korisnik ima prava za tu akciju).
 
 \subsection{Onemogućavanje usluge}
-Onemogućavanje usluge (eng.~{\em Denial of Service - DoS)} \cite{DoSM} predstavlja pokušaj da se neki resurs učini neraspoloživim. Cilj ovog napada nije da omogući pristup ili kontrolu nad udaljenim sistemom već da zauzimanjem svih komunikacionih kapaciteta onemoguće pristup sistemu od strane regularnih korisnika.
+Onemogućavanje usluge (eng.~{\em Denial of Service - DoS)} \cite{DoSM} predstavlja pokušaj da se neki resurs učini neraspoloživim. Cilj ovog napada nije da omogući pristup ili kontrolu nad udaljenim sistemom već da zauzimanjem svih komunikacionih kapaciteta onemogući pristup sistemu od strane regularnih korisnika.
 
 Napad se ostvaruje zatrpavanjem usluge mnoštvom zahteva. U jednostavnim slučajevima, napad se izvodi sa jednog uređaja, dok u složenijim može biti koordiniran napad sa više njih (eng.~{\em Distributed Denial of Service - DDoS)}.
 
 Prevencija ovog tipa napada se može implementirati na nivou mreže. Na primer, na nivou zaštitnog zida se može blokirati saobraćaj uređaja sa kog se šalju sumnjivi zahtevi. Još jedan vid prevencije bi bilo nadgledanje mreže i vođenje statistike o prosečnom broju pristiglih zahteva i reagovanje u odnosu na nagle promene.
 
-Ipak, u većini slučajeva  na napad je teško reagovati i pored svih vidova prevencije. Često je neophodno isključivanje servera sa mreže i ponovno pokretanje usluga na njemu.
+Ipak, u većini slučajeva na napad je teško reagovati i pored svih vidova prevencije. Često je neophodno isključivanje servera sa mreže i ponovno pokretanje usluga na njemu.
 
 Neki od čestih tipova napada onemogućavanja usluge \cite{DoS} su: 
 \begin{itemize}
-	\item Prekoračenje bafera - hakeri koriste propust u programu zbog kog podaci koji prekoračuju dužinu bafera budu upisani u drugi bafer, što može dovesti do pada sistema;
+	\item Prekoračenje bafera - hakeri koriste propust u programu zbog kog podaci koji prekoračuju dužinu bafera budu upisani u drugi bafer, što može dovesti do pada sistema
 	\item TCP SYN napad - napdač zatrpava server TCP zahtevima koji ostaju na čekanju, zbog čega se zahtev legitimnih korisnika nikada ne obrađuje...
 \end{itemize}
 
@@ -372,19 +372,18 @@ Ove mere ne garantuju, ali u velikoj meri doprinose povećanju bezbednosti veb s
 
 Predstavili smo različite principe i preporuke za pisanje bezbednog softvera i pripremanje okruženja za neometano funkcionisanje aplikacije. Da rezimiramo:
 \begin{itemize}
-	\item neophodno je voditi računa o kontroli pristupa podacima,
-	\item svaki podatak dostupan aplikaciji neophodno je detaljno proveriti i pripremiti za korišćenje,
-	\item posebnu pažnju obratiti na podatke dobijene od korisnika,
-	\item ništa ne pretpostavljati i sve potvrditi,
-	\item mora se obezbediti da mogućnosti korisnika budu jasno i striktno definisane,
+	\item neophodno je voditi računa o kontroli pristupa podacima
+	\item svaki podatak dostupan aplikaciji neophodno je detaljno proveriti i pripremiti za korišćenje
+	\item posebnu pažnju obratiti na podatke dobijene od korisnika
+	\item ništa ne pretpostavljati i sve potvrditi
+	\item mora se obezbediti da mogućnosti korisnika budu jasno i striktno definisane
 	\item neophodno je unapređivati bezbednost sistema nakon incidenata
-	\item ukoliko okruženje u kom se aplikacija izvršava nije bezbedno - nije bezbedna ni aplikacija.
+	\item ukoliko okruženje u kom se aplikacija izvršava nije bezbedno - nije bezbedna ni aplikacija
 \end{itemize}
 
 Bitno je napomenuti da nijedan softver nikada nije potpuno bezbedan, te se mora unapređivati. Takođe, sve navedeno u prethodnim poglavljima ne garantuje bezbednost, ali u velikoj meri smanjuje rizik od pojavljivanja propusta i predstavlja dobru praksu prilikom izrade softvera.
 
 Dalje istraživanje može se usmeriti ka detaljnijoj analizi drugih aspekata narušavanja bezbednosti i njihove prevencije koji nisu navedeni u ovom radu zarad korigovanja kompleksnosti. Takođe, pažnja se može više posvetiti samim posledicama napada, odnosno akcijama potrebnim za oporavak i vraćanje sistema u prvobitno stanje.
-
 
 \nocite{*}
 \appendix
