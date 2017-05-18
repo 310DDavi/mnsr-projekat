@@ -55,9 +55,9 @@ U nastavku ćemo govoriti o osnovnim principima dizajna bezbednog softvera. Kako
 
 \subsection{Kontrola pristupa podacima}
 
-Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja su poverljivost (sposobnost da se sopstveni podaci zaštite od neovlašćenog pristupa), integritet (sposobnost da se spreči neovlašćeno ili nepoželjno menjanje podataka) i raspoloživost informacija (sposobnost da se pristupa podacima kada su potrebni).
+Jedan od ciljeva sigurnosnog dizajna softvera je da se spreči entitet (korisnik ili napadač) od neovlašćenog pristupa sistemu. Pristup zaštićenim informacijama mora biti ograničen na lica koja imaju prava pristupa takvim informacijama, u suprotnom može doći do ugrožavanja bezbednosti informacija. Osnovni predmeti ugrožavanja \cite{SEC} su poverljivost (zaštita podataka od neovlašćenog pristupa), integritet (zaštita podataka od neovlašćenog menjanja) i raspoloživost informacija (sposobnost pružanja informacija kada su potrebne).
 
-Kontrola pristupa se ostvaruje u tri koraka \cite{Top10, SEC}:
+Kontrola pristupa se ostvaruje u tri koraka \cite{Top10}:
 \begin{itemize}
 	\item Identifikacija
 	\item Autentikacija
@@ -162,7 +162,7 @@ Vremenom su se razvile brojne vrste napada koje se koriste propustima u različi
 \begin{enumerate}
 	\item Umetanje skriptova (eng.~{\em Cross-Site Scripting})
 	\item Umetanje SQL upita (eng.~{\em SQL Injection})
-	\item Kontrola pristupa (eng.~{\em Access control})
+	\item Kontrola pristupa (eng.~{\em Access Control})
 	\item Onemogućavanje usluge (eng.~{\em Denial of Service - DoS})
 \end{enumerate}
 \subsection{Umetanje skriptova (XSS)}
@@ -174,7 +174,7 @@ Umetanje skriptova, poznatiji kao XSS \cite{XSS}, je napad umetanjem(eng.~{\em \
 	\item kontrola stranice (blokiranje rada, menjanje pojedinačnih elemenata...)
 	\item redirekcija na drugu, zlonamernu stranicu
 \end{enumerate}
-U nastavku videćemo različite vrste napada tipa XSS.
+U nastavku ćemo videti različite vrste napada tipa XSS.
 
 \subsubsection{Refleksivni XSS}
 
@@ -206,7 +206,7 @@ Suprotno Refleksivnom XSS-u koji ne ostavlja tragove na samoj aplikaciji, odnosn
 
 \subsubsection{XSS - prevencija}
 
-Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač renderuje HTML tagove i izvršava Javascript kod. Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je i prikazano na tabeli \ref{kodiranje}. Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
+Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač renderuje HTML tagove i izvršava Javascript kod. Rešenje je da pretraživač uradi enkodiranje na izlazu. Svaki karakter se enkoduje kao što je prikazano na tabeli \ref{kodiranje}. Rezultat ovoga je prikaz bezopasne renderovane HTML stranice (premda je problem samo premešten sa bezbednosnog na vizuelni).
 
 \begin{table}[ht]
 
@@ -235,7 +235,7 @@ Sprečavanje XSS \cite{XSS_prev} napada se oslanja na to što pretraživač rend
 
 \subsection{Umetanje SQL upita}
 
-Umetanje SQL upita (eng.~{\em SQL injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt. Ovaj put, glavna meta je baza podataka koju koristi server.\\
+Umetanje SQL upita (eng.~{\em SQL Injection}) \cite{SQL} predstavlja još jedan vid napada umetanjem kodova (tačnije upita) u sajt. Ovaj put, glavna meta je baza podataka koju koristi server.\\
 \textbf{Problem:} Podaci se šalju od strane korisnika, a sistem ne rukuje sa njima na pravilan način.\\
 \textbf{Posledice:} 
 \begin{enumerate}
@@ -295,7 +295,7 @@ Pretpostavimo da imamo sajt banke kod koje imamo otvoren račun i nalog na njemu
 \texttt{http://banka.com/nalog?id=123}\\
 Gde je \say{123} naša reprezentacija sajtu banke. Jednostavnom izmenom \say{123} na npr. \say{124} možemo dobiti pregled drugog korisničkog naloga (najopasnija promena bi bila sa \say{123} na \say{1} jer je to najčešće id administratora sa svim pravima pristupa).
 \end{primer}
-Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje naredni primer.
+Osim pregledanja tuđeg naloga, moguće je i korišćenje funkcionalnosti za koja nemamo prava, što pokazuje primer \ref{primer4}.
 
 \begin{primer}
 \label{primer4}
